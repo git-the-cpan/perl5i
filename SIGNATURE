@@ -1,0 +1,38 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.55.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+SHA1 eca8ec462ccfb7a274bc54c30684b6bda909025d Build.PL
+SHA1 9872d52b502b3dc16b457612ebb026198b2284f6 MANIFEST
+SHA1 c4c081b812afdd274d037fe04ba8776c0b831caa MANIFEST.SKIP
+SHA1 25b95a7de84db1d75693580300bcba01b90dcc5f META.yml
+SHA1 88e615f17b79364b0e8096f369849c608b3383e1 README
+SHA1 1607f3299056bcbfaf9deb64085e5a120c34319a lib/perl5i.pm
+SHA1 b791b0eca766316da93ff1c2b1f374ca20a6176a t/CLASS.t
+SHA1 aeaa2d92fa831efbf195d62b1fcb8114f6497de8 t/File-stat.t
+SHA1 0d4b76e063a1ec216c5fef2cff335c3fdefd95ba t/Module-Load.t
+SHA1 1c6886f3c83101a740077b367dcf08e4ec6e6862 t/Time-Piece.t
+SHA1 78daf80f00c5ddbe408b3234293e86c376d8a705 t/autobox.t
+SHA1 e2d152d1ec120157ea5eb4e3bb5927bc5f858c68 t/autodie.t
+SHA1 fe7cc33c5a436c2becb772ecd9b486d4934de0ee t/lexical.t
+SHA1 e4638d82d16263a8e5b968f11e0b39e5b6bee216 t/modern_perl.t
+SHA1 08857e5bf2c15dc1e56c7285e09d068993dd8630 t/y2038.t
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG/MacGPG2 v2.0.11 (Darwin)
+
+iEYEARECAAYFAknyBskACgkQWMohlhD1Qyd4GACglCy5HGE6kYeCveW8t+9ylF+F
+6DQAnRUebtSIZwAkdLYMUcPn74tRkBHE
+=tHIi
+-----END PGP SIGNATURE-----
