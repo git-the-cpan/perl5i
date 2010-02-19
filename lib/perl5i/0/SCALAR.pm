@@ -1,12 +1,12 @@
 # vi: set ts=4 sw=4 ht=4 et :
-package perl5i::SCALAR;
+package perl5i::0::SCALAR;
 use 5.010;
 
 use strict;
 use warnings;
 use Carp;
-use Module::Load;
-
+use Taint::Util;
+use autobox;
 
 sub SCALAR::title_case {
     my ($string) = @_;
@@ -62,7 +62,9 @@ sub SCALAR::rtrim {
 
 
 sub SCALAR::trim {
-    return SCALAR::rtrim(SCALAR::ltrim(@_));
+    my $charset = $_[1];
+
+    return SCALAR::rtrim(SCALAR::ltrim($_[0], $charset), $charset);
 }
 
 
@@ -74,7 +76,7 @@ sub SCALAR::wrap {
 
     return $string if $width <= 0;
 
-    load Text::Wrap;
+    require Text::Wrap;
     local $Text::Wrap::separator = $separator;
     local $Text::Wrap::columns   = $width;
 
@@ -83,5 +85,58 @@ sub SCALAR::wrap {
 }
 
 
+# untaint the scalar itself, not the reference
+sub SCALAR::untaint {
+    return $_[0]->mo->untaint if ref $_[0];
+
+    Taint::Util::untaint($_[0]);
+    return 1;
+}
+
+
+# untaint the scalar itself, not the reference
+sub SCALAR::taint {
+    return $_[0]->mo->taint if ref $_[0];
+
+    Taint::Util::taint($_[0]);
+    return 1;
+}
+
+# Could use the version in Meta but this removes the need to check
+# for overloading.
+sub SCALAR::is_tainted {
+    return ref $_[0] ? Taint::Util::tainted(${$_[0]}) : Taint::Util::tainted($_[0]);
+}
+
+
+sub SCALAR::load {
+    require Module::Load;
+    goto &Module::Load::load;
+}
+
+
+sub SCALAR::alias {
+    croak <<ERROR if !ref $_[0];
+Due to limitations in autoboxing, scalars cannot be aliased.
+Sorry.  Use a scalar reference instead.
+ERROR
+
+    goto &DEFAULT::alias;
+}
+
+
+use POSIX qw{ceil floor};
+sub SCALAR::ceil  { ceil($_[0]) }
+sub SCALAR::floor { floor($_[0])}
+*SCALAR::round_up   = \&SCALAR::ceil;
+*SCALAR::round_down = \&SCALAR::floor;
+
+use Scalar::Util qw(looks_like_number);
+sub SCALAR::is_number           { looks_like_number($_[0]) }
+sub SCALAR::is_positive         { $_[0]->is_number && $_[0] > 0 }
+sub SCALAR::is_negative         { $_[0]->is_number && $_[0] < 0 }
+sub SCALAR::is_integer          { $_[0]->is_number && ((int($_[0]) - $_[0]) == 0) }
+*SCALAR::is_int = \&SCALAR::is_integer;
+sub SCALAR::is_decimal          { $_[0]->is_number && ((int($_[0]) - $_[0]) != 0) }
 
 1;

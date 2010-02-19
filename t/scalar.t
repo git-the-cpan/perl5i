@@ -1,7 +1,7 @@
 #!perl
 
 use Test::More 'no_plan';
-use perl5i;
+use perl5i::latest;
 
 is( "this is a test"->title_case, 'This Is A Test');
 is( "this is a test"->lc->title_case, 'This Is A Test');
@@ -21,3 +21,8 @@ is( '    testme    '->ltrim, 'testme    ' );
 is( '    testme    '->rtrim, '    testme' );
 is( '    testme    '->trim,  'testme' );
 
+is( '--> testme <--'->ltrim("-><"), ' testme <--' );
+is( '--> testme <--'->rtrim("-><"), '--> testme ' );
+is( '--> testme <--'->trim("-><"),  ' testme ' );
+
+is( ' --> testme <--'->trim("-><"),  ' --> testme ' );

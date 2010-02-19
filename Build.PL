@@ -10,6 +10,7 @@ my $builder = MyBuild->new(
     module_name => 'perl5i',
     license     => 'perl',
     dist_author => 'Michael G Schwern <schwern@pobox.com>',
+    dist_version => 'v0.2.1',
 
     requires => {
         'perl'                    => '5.10.0',
@@ -20,6 +21,7 @@ my $builder = MyBuild->new(
         'Time::y2038'             => '20081111',
         'Module::Load'            => '0.16',
         'Text::Wrap'              => '2009.0305',
+        'Try::Tiny'               => '0.02',
         'autodie'                 => '1.999',
         # Needed for autodie :system
         'IPC::System::Simple' => '1.18',
@@ -31,11 +33,17 @@ my $builder = MyBuild->new(
         'Want'                => '0.18',
         'autovivification'    => '0.04',
         'version'             => '0.77',
+        'Perl6::Caller'       => '0.100',
+        "Taint::Util"         => '0.06',
+        'Hash::Merge::Simple' => '0.04',
+        'List::MoreUtils'     => '0.22',
+        'Array::Diff'         => '0.05002',
     },
     build_requires => {
         'ExtUtils::CBuilder' => '0.26',
         'Test::More'         => '0.88',
         'Test::Warn'         => '0.11',
+        'Test::Exception'    => '0.27',
         'IPC::Open3'         => '0',
     },
     configure_requires => {
@@ -44,8 +52,10 @@ my $builder = MyBuild->new(
 
     meta_merge => {
         resources => {
-            repository => 'http://github.com/schwern/perl5i/tree/master',
-            bugtracker => 'http://github.com/schwern/perl5i/issues',
+            repository  => 'http://github.com/schwern/perl5i/tree/master',
+            bugtracker  => 'http://github.com/schwern/perl5i/issues',
+            MailingList => "http://groups.google.com/group/perl5i",
+            Chat        => "irc://irc.perl.org/#perl5i",
         },
     },
 
