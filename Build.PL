@@ -1,7 +1,9 @@
 #!/usr/bin/perl -w
 
 use strict;
-use lib 'inc';
+
+# Include 'lib' so it sees our perl5i::VERSION when version checking
+use lib 'inc', 'lib';
 use MyBuild;
 
 use 5.010;
@@ -10,7 +12,7 @@ my $builder = MyBuild->new(
     module_name => 'perl5i',
     license     => 'perl',
     dist_author => 'Michael G Schwern <schwern@pobox.com>',
-    dist_version => 'v0.2.1',
+    dist_version => 'v0.2.2',
 
     requires => {
         'perl'                    => '5.10.0',
@@ -56,6 +58,19 @@ my $builder = MyBuild->new(
             bugtracker  => 'http://github.com/schwern/perl5i/issues',
             MailingList => "http://groups.google.com/group/perl5i",
             Chat        => "irc://irc.perl.org/#perl5i",
+        },
+        no_index => {
+            file  => [qw(
+                lib/perl5i/0/DateTime.pm
+                lib/perl5i/0/ARRAY.pm
+                lib/perl5i/0/DEFAULT.pm
+                lib/perl5i/0/HASH.pm
+                lib/perl5i/0/Meta.pm
+                lib/perl5i/0/Meta/Class.pm
+                lib/perl5i/0/Meta/Instance.pm
+                lib/perl5i/0/SCALAR.pm
+                lib/perl5i/VERSION.pm
+            )],
         },
     },
 

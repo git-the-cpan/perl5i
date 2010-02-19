@@ -16,6 +16,17 @@ meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
 name: perl5i
+no_index:
+  file:
+    - lib/perl5i/0/DateTime.pm
+    - lib/perl5i/0/ARRAY.pm
+    - lib/perl5i/0/DEFAULT.pm
+    - lib/perl5i/0/HASH.pm
+    - lib/perl5i/0/Meta.pm
+    - lib/perl5i/0/Meta/Class.pm
+    - lib/perl5i/0/Meta/Instance.pm
+    - lib/perl5i/0/SCALAR.pm
+    - lib/perl5i/VERSION.pm
 provides:
   DateTime::Format::CTime:
     file: lib/perl5i/0/DateTime.pm
@@ -25,10 +36,10 @@ provides:
     file: lib/perl5i/0/DateTime.pm
   perl5i:
     file: lib/perl5i.pm
-    version: v0.2.0
+    version: v0.2.2
   perl5i::0:
     file: lib/perl5i/0.pm
-    version: v0.2.0
+    version: v0.2.2
   perl5i::0::ARRAY:
     file: lib/perl5i/0/ARRAY.pm
   perl5i::0::DEFAULT:
@@ -47,10 +58,10 @@ provides:
     file: lib/perl5i/0/SCALAR.pm
   perl5i::VERSION:
     file: lib/perl5i/VERSION.pm
-    version: v0.2.1
+    version: v0.2.2
   perl5i::latest:
     file: lib/perl5i/latest.pm
-    version: v0.2.0
+    version: v0.2.2
 requires:
   Array::Diff: 0.05002
   CLASS: 1.00
@@ -82,4 +93,4 @@ resources:
   bugtracker: http://github.com/schwern/perl5i/issues
   license: http://dev.perl.org/licenses/
   repository: http://github.com/schwern/perl5i/tree/master
-version: v0.2.1
+version: v0.2.2
