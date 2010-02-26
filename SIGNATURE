@@ -1,0 +1,126 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.61.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+SHA1 b38d844144d8fd1d7273736c48f01106df558137 .perlcriticrc
+SHA1 f723872651f0cd52a4aca957af3536f931667340 .perltidyrc
+SHA1 e14f2e2310376b5bd0028a907181feba39d3bfbd Build.PL
+SHA1 1012ce1bc2f1f32713cc6f0ece6696e0af3018cf Changes
+SHA1 e421537a09310e0e3b3fc430b50d85a0e9d42465 INSTALL.SKIP
+SHA1 e7bc66fca43fc9dba4c777e7a60ef6fc102a8b02 LICENSE
+SHA1 551f7ab7ea2fc33d7f058b79ccac4b694bb8d84b MANIFEST
+SHA1 ea8cc19f468d1417fa88a2bfe8282295fbc6cd67 MANIFEST.SKIP
+SHA1 470ae1daa1e9d792a8b325bd7f783082be359dff META.yml
+SHA1 f5b7718ad133f036cf62e6ba93bfb6e61572a4c0 PATCHING
+SHA1 10ecf60922e12933c252c23638b8f4b425946be3 README
+SHA1 075b94520ebdb9fa0a7e6265c505b41635138721 bin/perl5i.bat.PL
+SHA1 c88002ae50f805487ac34c95d5d1af9077d05700 bin/perl5i.c.PL
+SHA1 b70d45b05d575dcb4a8e664fc0570099c7f4d8af bin/perl5i.plx
+SHA1 2270224e9b2bd669f4836101391fedf3b90a55f7 inc/MyBuild.pm
+SHA1 c80e0264421da479a5138d1d07cc32c2ad8a9f59 lib/perl5i.pm
+SHA1 bf814378c9005af01f474d3a0a7124d683364487 lib/perl5i/0.pm
+SHA1 03ab9768a7c07e28abd5a46be8246ba986a001f4 lib/perl5i/0/ARRAY.pm
+SHA1 f7d5bde84eae968c048101befa515cf7dc5131b1 lib/perl5i/0/DEFAULT.pm
+SHA1 1dfaafadaf4ef727a3047d3a36ead6b17311dca7 lib/perl5i/0/DateTime.pm
+SHA1 2fd0a62a5f391e2f22ec3920ebfb37f07bf375f5 lib/perl5i/0/HASH.pm
+SHA1 f5493e77838faf72ae4b923d4780f4ef387382f4 lib/perl5i/0/Meta.pm
+SHA1 81158b8ef228eed67fbc9b707ac723dcbc5b1141 lib/perl5i/0/Meta/Class.pm
+SHA1 6a6de143060a9998291f49acb45b82324b45b344 lib/perl5i/0/Meta/Instance.pm
+SHA1 3f5f4e9d4f1e77cdd65c870e3f5197067f8c68e2 lib/perl5i/0/SCALAR.pm
+SHA1 c218a991dd6bf0947558f43b3caf294eb795cd91 lib/perl5i/1.pm
+SHA1 a6b42d416eb9df0da92b7be451d17bf8f2d5473b lib/perl5i/1/ARRAY.pm
+SHA1 f1480821bef5aef519bebda72cc164fff222c2da lib/perl5i/1/CODE.pm
+SHA1 f5b200fb0b22b1b39a5e3731de77dfae8c20cdc3 lib/perl5i/1/DateTime.pm
+SHA1 5a9437697c86cf89d7139ca0a0f5ccea7e6f6a9c lib/perl5i/1/HASH.pm
+SHA1 198cda2277028cc601ec3878e3b8bb3c9dd38502 lib/perl5i/1/Meta.pm
+SHA1 8f90cc918a83a85b7454d221d1e6309b0de01c95 lib/perl5i/1/Meta/Class.pm
+SHA1 619d8f54ebc8eb0ad1655aa43ae17ead643ce579 lib/perl5i/1/Meta/Instance.pm
+SHA1 25d83a27945c794b3f422aa37057e5fdca59c718 lib/perl5i/1/SCALAR.pm
+SHA1 2a1d096958fdcef671e901c1c38c4646d533bbc8 lib/perl5i/1/UNIVERSAL.pm
+SHA1 3c5e3b33a81e92de285b515f4f89b76912ecc456 lib/perl5i/1/autobox.pm
+SHA1 781a217aeb1bfe4f88a5289507794106f786d357 lib/perl5i/Meta.pm
+SHA1 98af0c6f9dbf160da110b8345d5241a22b286f63 lib/perl5i/VERSION.pm
+SHA1 2df9a4ecaa23b64142ef42eb2a7cca636172a1c9 lib/perl5i/latest.pm
+SHA1 12195536478d8a5d76bc80fe1d77ee86dfa89a08 lib/perl5ifaq.pod
+SHA1 990e85c3266a7d9127763929b71f51c332275fcb t/ARGV.t
+SHA1 59f2fb408a2657bde427dfb3da2611634824cfff t/CLASS.t
+SHA1 b82195fb62380fcd1af36b12287bf274919e8b73 t/English.t
+SHA1 5cc638a216db348a23c7e198d41e0ac551e72d50 t/File-stat.t
+SHA1 1e11faedc1834ba90fb921b9fd859f8b99afbf5d t/List-MoreUtils/all.t
+SHA1 db7a237ffc50c71443a31b5cc61ba6cdce4a311e t/List-MoreUtils/any.t
+SHA1 fc59b1e3f2417133bb5626a3bd5be55fd16b9f56 t/List-MoreUtils/false.t
+SHA1 a5f6cd80353ac5de9e77d8d3b97ca3bc437d0f45 t/List-MoreUtils/mesh.t
+SHA1 0d05542814a801c535e196e8bdfd09b92809f7e9 t/List-MoreUtils/minmax.t
+SHA1 acddb49865c5f7e5bc0050f0b61941b7bad5e3ee t/List-MoreUtils/none.t
+SHA1 59d66e49836ec3489ad843d4604092be014d5520 t/List-MoreUtils/true.t
+SHA1 08c28ff3ca82dcbe936528aba39f8713e7e94eaf t/List-MoreUtils/uniq.t
+SHA1 dd9768d3e498f6ace0300dc1bfb6bae677a6fa07 t/List-Util/first.t
+SHA1 1d0b05499eec4710f3afb51ef36c5a0f930a63b6 t/List-Util/max.t
+SHA1 194364a7535687231943e040f11b8771102fbd9d t/List-Util/maxstr.t
+SHA1 afa264ab8eb08efba9637eb4ed9c39099b6e7c30 t/List-Util/min.t
+SHA1 dab896c18edacfdf21c290f03740c0b607a6baa5 t/List-Util/minstr.t
+SHA1 1f089b6178fb2d2f861733c9b8b172ffc57ec15c t/List-Util/reduce.t
+SHA1 5843e14fff6dd24127893f1dbc9837111dec9778 t/List-Util/shuffle.t
+SHA1 8014885ac0c2db52bccef7574a0fcf7511f43253 t/List-Util/sum.t
+SHA1 0b2e2f228cce1400e60cd4637a2701496f804f83 t/Meta/ISA.t
+SHA1 4bf79601eb030e6c882ef068109de96d18833a2c t/Meta/class.t
+SHA1 c4c75d4888c80c9ad84827f49719bb3147f36f15 t/Meta/linear_isa.t
+SHA1 2df951eafd89d997df5a5405350b245d0e349bf8 t/Meta/reftype.t
+SHA1 605bbe7392e1940bf1bba69d085fcc9c7299ca9a t/Meta/super.t
+SHA1 03f7b783ddd5b4af7a4d2471e3a941523766b33c t/Module-Load.t
+SHA1 004a351b81308007a5db17ded798a0404dd0e0f1 t/Want.t
+SHA1 6d8f57f961b07270fc4d8647bb39809af214c46d t/alias.t
+SHA1 81fbaa24db062d0a8c5195f0ab9b3a6f8a8d546f t/autobox.t
+SHA1 309f9ac9051f88d84106ae92a67dca75c4512c13 t/autodie.t
+SHA1 e9abdb2c8cebaaaa05b4ebeae5f756fe0817cbe1 t/autovivification.t
+SHA1 dda81cd929af7ddcc21643295025a053ace3951e t/caller.t
+SHA1 1c2ecf564b73fc6731d04971f0c6130427009c97 t/carp.t
+SHA1 1f99fcb3316a44099b121dd53851a9420bd72f2d t/center.t
+SHA1 3e2c1702a6bec409d2fe117863142f4c500a0ad4 t/chdir.t
+SHA1 615f92a039704e38cc4e05649fd199f44a61449c t/command_line_wrapper.t
+SHA1 543d149d3fe5789f115f3e3f4ad736b3b93845cd t/datetime.t
+SHA1 d4c9c18c466ee3d787ed97278f4a478b199efece t/die.t
+SHA1 79393349d1614ee6b53226bb278ba6de1d8da10a t/diff.t
+SHA1 9607fddafdd8f972de7c42f031cdf35e0d9bc834 t/dump/array.t
+SHA1 46300983894e21fa18761e403c80003b0db1a28e t/dump/code.t
+SHA1 b19391eec24c91f74df2065af41b01b7f3b40d81 t/dump/hash.t
+SHA1 b38aaa1c9ddce80967597ac5f9659a8baf962603 t/dump/scalar.t
+SHA1 c12c020e3a36ea1ad102318cbf0f90f3ef25e0ff t/everything_is_an_object.t
+SHA1 a75e3f2ff916ab6255e827be76a44b0e8f88a1e2 t/flip.t
+SHA1 df438f06a6e2e50fe048d5990be1f5f7600683f2 t/grep.t
+SHA1 231c27d4c444e6bee92fbce66885433b25181cad t/hash-merge.t
+SHA1 b4cd4bf846d466eb822027859c6f784cdcb39655 t/intersect.t
+SHA1 730463409da99a2878d6c6e2e0b69b4d3b65b48e t/io-handle.t
+SHA1 a3ae4795b6233c66cece291c376787d9675f9121 t/lexical.t
+SHA1 b6d024efa118928f6d95926a1c881ebe7895c295 t/method_leaking.t
+SHA1 d278e655389c8a4d10e0e9fb22c5cfb829a1803c t/modern_perl.t
+SHA1 7572b389a16d4f95feaca1aa9c2bbd343f67a3e3 t/number.t
+SHA1 df9deb06bea83eca7c118a8de7fda2ce5ca48e7a t/perl5i.t
+SHA1 45f2ad106ce4feba62c0658f27d9db076cfecaf1 t/scalar.t
+SHA1 a48a0167b13ccd5678d38c9ba12681a3441ba3ae t/taint.t
+SHA1 bce473ccf439afff3ca23fbc8ed9998ceea25410 t/time_compat.t
+SHA1 3948145d426d55b6a39d97f650351991418f0d01 t/try-tiny.t
+SHA1 5c0615dceefa82c04e853ea0d5215cca64045201 t/utf8.t
+SHA1 1e658f0f0b6dae2ef38966301789fd35ef453376 t/version_0/00_compile.t
+SHA1 68a7043044c865f1ba17c29878274eee380961e1 t/version_1/00_compile.t
+SHA1 24924095de8d8e8761fb72525b297c875f811e62 t/wrap.t
+SHA1 e7549a3bce2f644b6f72fdd137d01b5fa55d0118 t/y2038.t
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.13 (Darwin)
+
+iEYEARECAAYFAkuHY6YACgkQWMohlhD1Qye9kgCZAaJwnQxO7PYHN2Jn/UL9dbM5
+XbwAoIfzPHHauFKmD9vtT8+QEf/hVBjw
+=SQOT
+-----END PGP SIGNATURE-----

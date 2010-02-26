@@ -1,10 +1,11 @@
 package perl5i;
 
 ######################################
-# The real code is in perl5i::0      #
+# The real code is in perl5i::1      #
 # Please patch that                  #
 ######################################
 
+use strict;
 use perl5i::VERSION; our $VERSION = perl5i::VERSION->VERSION;
 
 my $Latest = perl5i::VERSION->latest;
@@ -18,8 +19,6 @@ Instead, "use $Latest" which will guarantee compatibility with all
 feature supplied in that major version.
 
 Type "perldoc perl5i" for details in the section "Using perl5i".
-
-NOTE:  Version 0 does not guarantee compatibility.  Version 1 and up will.
 END
 }
 
@@ -33,7 +32,7 @@ perl5i - Fix as much of Perl 5 as possible in one pragma
 
 =head1 SYNOPSIS
 
-  use perl5i::0;
+  use perl5i::1;
 
   or
 
@@ -41,21 +40,14 @@ perl5i - Fix as much of Perl 5 as possible in one pragma
 
 =head1 DESCRIPTION
 
-B<THIS MODULE'S INTERFACE IS UNSTABLE!> It's still a playground.
-Features may be added, changed and removed without notice.  C<use
-perl5i> may not even work in the future.  See
-L<http://github.com/schwern/perl5i/issues/issue/69> and
-L<http://github.com/schwern/perl5i/issues/issue/60> for details.  You
-have been warned.
-
 Perl 5 has a lot of warts.  There's a lot of individual modules and
 techniques out there to fix those warts.  perl5i aims to pull the best
 of them together into one module so you can turn them on all at once.
 
 This includes adding features, changing existing core functions and
 changing defaults.  It will likely not be 100% backwards compatible
-with Perl 5, though it will be 99%, but perl5i will try to have a
-lexical effect.
+with Perl 5, though it will be 99%, perl5i will try to have a lexical
+effect.
 
 Please add to this imaginary world and help make it real, either by
 telling me what Perl looks like in your imagination
@@ -69,18 +61,17 @@ Because perl5i I<plans> to be incompatible in the future, you do not
 simply C<use perl5i>.  You must declare which major version of perl5i
 you are using.  You do this like so:
 
-    # Use perl5i major version 0
-    use perl5i::0;
+    # Use perl5i major version 1
+    use perl5i::1;
 
-While version 0 does not guarante to be compatibility, 1 and up will.
-Thus the code you write with, for example, C<perl5i::2> will always
+Thus the code you write with, for example, C<perl5i::1> will always
 remain compatible even as perl5i moves on.
 
 If you want to be daring, you can C<use perl5i::latest> to get the
 latest version.
 
 If you want your module to depend on perl5i, you should depend on the
-versioned class.  For example, depend on C<perl5i::0> and not
+versioned class.  For example, depend on C<perl5i::1> and not
 C<perl5i>.
 
 See L</VERSIONING> for more information about perl5i's versioning
@@ -210,6 +201,12 @@ than C<< $string->length >> it will just return C<$string>.
 
     say "Hello"->center(4);        # "Hello";
 
+=head2 round
+
+    my $rounded_number = $number->round;
+
+Round to the nearest integer.
+
 =head2 round_up
 
 =head2 ceil
@@ -240,7 +237,7 @@ floor() is a synonyn for round_down().
 
     $is_a_number = $thing->is_number;
 
-Returns true of $thing is a number understood by Perl.
+Returns true if $thing is a number understood by Perl.
 
     12.34->is_number;           # true
     "12.34"->is_number;         # also true
@@ -360,17 +357,56 @@ order to allow chaining.
 
 =head3 diff()
 
-Calculate the difference of two arrays:
+Calculate the difference between two (or more) arrays:
 
-    my @a = ( 1, 2, 3);
-    my @b = ( 3, 4, 5);
+    my @a = ( 1, 2, 3 );
+    my @b = ( 3, 4, 5 );
 
-    @a->diff(\@b) # [ 1, 2 ]
-    @b->diff(\@a) # [ 4, 5 ]
+    my @diff_a = @a->diff(\@b) # [ 1, 2 ]
+    my @diff_b = @b->diff(\@a) # [ 4, 5 ]
 
-Currently, it uses L<Array::Diff> and only operates on shallow arrays.
-This means that it won't try to compare nested data structures, although
-it might do so in the future.
+Diff returns all elements in array C<@a> that are not present in array
+C<@b>. Item order is not considered: two identical elements in both
+arrays will be recognized as such disregarding their index.
+
+    [ qw( foo bar ) ]->diff( [ qw( bar foo ) ] ) # empty, they are equal
+
+For comparing more than two arrays:
+
+    @a->diff(\@b, \@c, ... )
+
+All comparisons are against the base array (C<@a> in this example). The
+result will be composed of all those elements that were present in C<@a>
+and in none other.
+
+It also works with nested data structures; it will traverse them
+depth-first to assess whether they are identical or not. For instance:
+
+    [ [ 'foo ' ], { bar => 1 } ]->diff([ 'foo' ]) # [ { bar => 1 } ]
+
+In the case of overloaded objects (i.e., L<DateTime>, L<URI>,
+L<Path::Class>, etc.), it tries its best to treat them as strings or numbers.
+
+    my $uri  = URI->new("http://www.perl.com");
+    my $uri2 = URI->new("http://www.perl.com");
+
+    [ $uri ]->diff( [ "http://www.perl.com" ] ); # empty, they are equal
+    [ $uri ]->diff( [ $uri2 ] );                 # empty, they are equal
+
+
+=head3 intersect()
+
+    my @a = (1 .. 10);
+    my @b = (5 .. 15);
+
+    my @intersection = @a->intersect(\@b) # [ 5 .. 10 ];
+
+Performs intersection between arrays, returning those elements that are
+present in all of the argument arrays simultaneously.
+
+As with C<diff()>, it works with any number of arrays, nested data
+structures of arbitrary depth, and handles overloaded objects
+graciously.
 
 =head2 Hash Autoboxing
 
@@ -379,7 +415,7 @@ it might do so in the future.
 Exchanges values for keys in a hash.
 
     my %things = ( foo => 1, bar => 2, baz => 5 );
-    %things->flip; # { 1 => foo, 2 => bar, 5 => baz }
+    my %flipped = %things->flip; # { 1 => foo, 2 => bar, 5 => baz }
 
 If there is more than one occurence of a certain value, any one of the
 keys may end up as the value.  This is because of the random ordering
@@ -388,7 +424,7 @@ of hash keys.
     # Could be { 1 => foo }, { 1 => bar }, or { 1 => baz }
     { foo => 1, bar => 1, baz => 1 }->flip;
 
-Because hash reference cannot usefully be keys, it will not work on
+Because hash references cannot usefully be keys, it will not work on
 nested hashes.
 
     { foo => [ 'bar', 'baz' ] }->flip; # dies
@@ -562,6 +598,20 @@ of $@ and a nice syntax layer:
 
 See perldoc L<Try::Tiny> for details.
 
+=head1 Command line program
+
+There is a perl5i command line program installed with perl5i (Windows
+users get perl5i.bat).  This is handy for writing one liners.
+
+    perl5i -e 'gmtime->year->say'
+
+And you can use it on the C<#!> line.
+
+    #!/usr/bin/perl5i
+
+    gmtime->year->say;
+
+
 =head1 BUGS
 
 Some parts are not lexical.
@@ -600,7 +650,7 @@ Damian Conway.
 =head1 THANKS
 
 Thanks to our contributors: Chas Owens, Darian Patrick, rjbs,
-chromatic, Ben Hengst, and anyone else I've forgotten.
+chromatic, Ben Hengst, Bruno Vecchi and anyone else I've forgotten.
 
 Thanks to Flavian and Matt Trout for their signature and
 L<Devel::Declare> work.
@@ -623,6 +673,8 @@ Repository:   L<http://github.com/schwern/perl5i/tree/master>
 Issues/Bugs:  L<http://github.com/schwern/perl5i/issues>
 IRC:          irc.perl.org on the #perl5i channel
 Mailing List: L<http://groups.google.com/group/perl5i/>
+
+Frequently Asked Questions about perl5i: L<perl5ifaq>
 
 Some modules with similar purposes include:
 L<Modern::Perl>, L<Common::Sense>

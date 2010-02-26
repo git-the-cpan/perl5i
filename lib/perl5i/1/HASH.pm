@@ -1,13 +1,13 @@
 # vi: set ts=4 sw=4 ht=4 et :
-package perl5i::0::HASH;
+package perl5i::1::HASH;
 use 5.010;
 
 use strict;
 use warnings;
-use Carp;
+require Carp;
 
-sub HASH::flip {
-    croak "Can't flip hash with references as values"
+sub flip {
+    Carp::croak("Can't flip hash with references as values")
         if grep { ref } values %{$_[0]};
 
     my %flipped = reverse %{$_[0]};
@@ -15,7 +15,7 @@ sub HASH::flip {
     return wantarray ? %flipped : \%flipped;
 }
 
-sub HASH::merge {
+sub merge {
     require Hash::Merge::Simple;
     my $merged = Hash::Merge::Simple::merge(@_);
 

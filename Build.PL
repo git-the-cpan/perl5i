@@ -12,7 +12,7 @@ my $builder = MyBuild->new(
     module_name => 'perl5i',
     license     => 'perl',
     dist_author => 'Michael G Schwern <schwern@pobox.com>',
-    dist_version => 'v0.2.2',
+    dist_version => 'v1.0.0',
 
     requires => {
         'perl'                    => '5.10.0',
@@ -20,7 +20,7 @@ my $builder = MyBuild->new(
         'CLASS'                   => '1.00',
         'DateTime'                => '0.47',
         'DateTime::Format::Epoch' => '0.11',
-        'Time::y2038'             => '20081111',
+        'Time::y2038'             => '20100218',
         'Module::Load'            => '0.16',
         'Text::Wrap'              => '2009.0305',
         'Try::Tiny'               => '0.02',
@@ -39,7 +39,6 @@ my $builder = MyBuild->new(
         "Taint::Util"         => '0.06',
         'Hash::Merge::Simple' => '0.04',
         'List::MoreUtils'     => '0.22',
-        'Array::Diff'         => '0.05002',
     },
     build_requires => {
         'ExtUtils::CBuilder' => '0.26',
