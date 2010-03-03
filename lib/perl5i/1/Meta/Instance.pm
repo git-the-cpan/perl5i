@@ -7,6 +7,8 @@ require Scalar::Util;
 require overload;
 require Carp;
 
+use perl5i::1::autobox;
+
 use parent qw(perl5i::1::Meta);
 
 sub class {
@@ -63,6 +65,37 @@ sub untaint {
     }
 
     Carp::confess "Should never be reached";
+}
+
+
+sub checksum {
+    my( $thing, %args ) = @_;
+
+    my $algorithms = [qw(sha1 md5)];
+    $args{algorithm} //= 'sha1';
+    $args{algorithm} ~~ $algorithms or
+      Carp::croak("algorithm must be @{[ $algorithms->join(' or ' ) ]}");
+
+    my $format = [qw(hex base64 binary)];
+    $args{format} //= 'hex';
+    $args{format} ~~ $format or
+      Carp::croak("format must be @{[ $format->join(' or ') ]}");
+
+    my %prefix = ( hex => 'hex', base64 => 'b64', binary => undef );
+
+    my $module = 'Digest::' . uc $args{algorithm};
+    my $digest = defined $prefix{ $args{format} } ? $prefix{ $args{format} } . 'digest' : 'digest';
+
+    Module::Load::load($module);
+    my $digestor = $module->new;
+
+    require Data::Dumper;
+
+    my $d = Data::Dumper->new( [ ${$thing} ] );
+    $d->Deparse(1)->Terse(1)->Sortkeys(1)->Indent(0);
+
+    $digestor->add( $d->Dump );
+    return $digestor->$digest;
 }
 
 1;

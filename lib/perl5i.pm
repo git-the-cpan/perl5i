@@ -16,7 +16,7 @@ sub import {
 perl5i will break compatibility in the future, you can't just "use perl5i".
 
 Instead, "use $Latest" which will guarantee compatibility with all
-feature supplied in that major version.
+features supplied in that major version.
 
 Type "perldoc perl5i" for details in the section "Using perl5i".
 END
@@ -342,6 +342,28 @@ whitespace.
 Will uppercase every word character that follows a wordbreak character.
 
 
+=head3 path2module()
+
+    my $module = $path->path2module;
+
+Given a relative $path it will return the Perl module this represents.
+For example,
+
+    "Foo/Bar.pm"->path2module;  # "Foo::Bar"
+
+It will throw an exception if given something which could not be a
+path to a Perl module.
+
+=head2 module2path()
+
+    my $path = $module->module2path;
+
+Will return the relative $path in which the Perl $module can be found.
+For example,
+
+    "Foo::Bar"->module2path;  # "Foo/Bar.pm"
+
+
 =head2 List Autoboxing
 
 All the functions from L<List::Util> and select ones from
@@ -480,6 +502,9 @@ STDOUT, STDIN, STDERR and all newly opened filehandles will have UTF8
 encoding turned on.  Consequently, if you want to output raw bytes to
 a file, such as outputting an image, you must set C<< binmode $fh >>.
 
+=head2 Carp
+
+C<croak> and C<carp> from L<Carp> are always available.
 
 =head2 English
 

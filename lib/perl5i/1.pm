@@ -45,7 +45,7 @@ sub import {
     load_in_caller( $caller => (
         ["CLASS"], ["File::chdir"],
         [English => qw(-no_match_vars)],
-        ["Want" => qw(want)], ["Try::Tiny"], ["Perl6::Caller"],
+        ["Want" => qw(want)], ["Try::Tiny"], ["Perl6::Caller"], ["Carp"]
     ) );
 
     # Have to call both or it won't work.
@@ -60,7 +60,6 @@ sub import {
     (\&{$Latest .'::DateTime::dt_gmtime'})->alias($caller, 'gmtime');
     (\&{$Latest .'::DateTime::dt_localtime'})->alias($caller, 'localtime');
     (\&{$Latest .'::DateTime::dt_time'})->alias($caller, 'time');
-    (\&alias)->alias( $caller, 'alias' );
     (\&stat)->alias( $caller, 'stat' );
     (\&lstat)->alias( $caller, 'lstat' );
     (\&utf8_open)->alias($caller, 'open');

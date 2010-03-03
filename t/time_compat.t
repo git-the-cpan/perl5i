@@ -5,6 +5,7 @@
 use perl5i::latest;
 
 use Test::More 'no_plan';
+use Test::Output;
 
 
 #localtime in scalar context
@@ -83,4 +84,18 @@ my $now = time();
     my $num    = $dt+0;
 
     ok $dt == $num;
+}
+
+
+# Test times honor say and print
+{
+    # Due to a bug in 5.10's tie, the newline on say gets lost, but
+    # it will be back in 5.12.  So we can't test for it.
+    stdout_like { time->say;   } qr/^\d+$/;
+    stdout_like { time->print; } qr/^\d+$/;
+
+    my $time = int rand 2**31;
+    my $date = gmtime($time);
+    stdout_like { gmtime($time)->say;   } qr/^\Q$date\E$/;
+    stdout_is   { gmtime($time)->print; } "$date";
 }

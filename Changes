@@ -1,3 +1,19 @@
+1.1.0  Tue Mar  2 19:09:49 PST 2010
+  New Features
+  * print() and say() now work on hashes, time(), localtime() and gmtime().
+  * $obj->mo->checksum will return a checksum for the contents of any object.
+  * Added $path->path2module and $module->module2path
+
+  Bugs
+  * alias() was still being exported.
+  * Work around DateTime::TimeZone not being able to determine the local
+    time zone on FreeBSD and possibly others.
+  * localtime() is less suseptable to the DateTime distant year DOS attack.
+
+  Docs
+  * Document that carp() and croak() are exported.
+
+
 1.0.0  Thu Feb 25 21:56:47 PST 2010
   New Features
   * @array->first() now takes a regex like @array->grep() [github 93] (brunov)

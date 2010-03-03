@@ -136,3 +136,39 @@ overloaded objects who can untaint their overloaded value.
     my $reftype = $object->mo->reftype;
 
 Returns the underlying reference type of the $object.
+
+=head2 checksum
+
+    my $checksum = $object->mo->checksum;
+    my $md5    = $object->mo->checksum( algorithm => 'md5' );
+    my $base64 = $object->mo->checksum( format => 'base64' );
+
+Get a digest of the object's contents, taking its class into account.
+
+Two different objects can have the same checksum if their contents
+are identical. Likewise, a single object can have different checksums
+throughout its life cycle if it's mutable. This means its checksum
+will change if its internal state changes.
+
+For example,
+
+    $obj->mo->checksum( format => 'base64', algorithm => 'md5' );
+
+=head3 options
+
+=over 4
+
+=item algorithm
+
+The checksum algorithm.  Can be C<sha1> and C<md5>.
+
+Defaults to sha1.
+
+=item format
+
+The character set of the checksum, can be C<hex>, C<base64>, or
+C<binary>.
+
+Defaults to hex.
+
+=back
