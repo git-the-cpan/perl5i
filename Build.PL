@@ -12,7 +12,7 @@ my $builder = MyBuild->new(
     module_name => 'perl5i',
     license     => 'perl',
     dist_author => 'Michael G Schwern <schwern@pobox.com>',
-    dist_version => 'v2.0.1',
+    dist_version => 'v2.0.2',
 
     requires => {
         'perl'                    => '5.10.0',
@@ -39,6 +39,9 @@ my $builder = MyBuild->new(
         "Taint::Util"         => '0.06',
         'Hash::Merge::Simple' => '0.04',
         'List::MoreUtils'     => '0.22',
+        indirect              => '0.19',
+        'JSON'                => '2.17',
+        'YAML::Any'           => '0.70',
     },
     build_requires => {
         'ExtUtils::CBuilder' => '0.26',
@@ -47,6 +50,11 @@ my $builder = MyBuild->new(
         'Test::Exception'    => '0.27',
         'IPC::Open3'         => '0',
         'Test::Output'       => '0.16',
+    },
+    configure_requires => {
+        # MB's auto configure requires only puts it in the META.yml
+        # so some CPAN shells won't see it.
+        "Module::Build"      => '0.36',
     },
 
     meta_merge => {
