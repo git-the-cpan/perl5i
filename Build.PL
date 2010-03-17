@@ -12,7 +12,7 @@ my $builder = MyBuild->new(
     module_name => 'perl5i',
     license     => 'perl',
     dist_author => 'Michael G Schwern <schwern@pobox.com>',
-    dist_version => 'v1.1.0',
+    dist_version => 'v2.0.0',
 
     requires => {
         'perl'                    => '5.10.0',
@@ -21,20 +21,19 @@ my $builder = MyBuild->new(
         'DateTime'                => '0.47',
         'DateTime::Format::Epoch' => '0.11',
         'DateTime::TimeZone::Tzfile' => '0.002',
-        'Time::y2038'             => '20100218',
-        'Module::Load'            => '0.16',
+        'Module::Load'            => '0.16',            # for perl5i::1
         'Text::Wrap'              => '2009.0305',
         'Try::Tiny'               => '0.02',
         'autodie'                 => '1.999',
         # Needed for autodie :system
         'IPC::System::Simple' => '1.18',
-        'autobox::Core'       => '0.6',
+        'autobox::Core'       => '1.0',
         parent                => '0.221',
         'File::chdir'         => '0.1002',
-        'autobox::dump'       => '20090426',
+        'autobox::dump'       => '20090426',            # for perl5i::1
         'autobox::List::Util' => '20090629',
         'Want'                => '0.18',
-        'autovivification'    => '0.04',
+        'autovivification'    => '0.05',
         'version'             => '0.77',
         'Perl6::Caller'       => '0.100',
         "Taint::Util"         => '0.06',
@@ -48,9 +47,6 @@ my $builder = MyBuild->new(
         'Test::Exception'    => '0.27',
         'IPC::Open3'         => '0',
         'Test::Output'       => '0.16',
-    },
-    configure_requires => {
-        'Module::Build' => '0.32',
     },
 
     meta_merge => {
@@ -85,5 +81,7 @@ my $builder = MyBuild->new(
     create_readme       => 1,
     create_license      => 1,
 );
+
+$builder->requires->{"Time::y2038"} = "20100218" if $builder->needs_y2038;
 
 $builder->create_build_script();

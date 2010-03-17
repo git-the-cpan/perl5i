@@ -1,7 +1,7 @@
 package perl5i;
 
 ######################################
-# The real code is in perl5i::1      #
+# The real code is in perl5i::2      #
 # Please patch that                  #
 ######################################
 
@@ -32,7 +32,7 @@ perl5i - Fix as much of Perl 5 as possible in one pragma
 
 =head1 SYNOPSIS
 
-  use perl5i::1;
+  use perl5i::2;
 
   or
 
@@ -62,16 +62,16 @@ simply C<use perl5i>.  You must declare which major version of perl5i
 you are using.  You do this like so:
 
     # Use perl5i major version 1
-    use perl5i::1;
+    use perl5i::2;
 
-Thus the code you write with, for example, C<perl5i::1> will always
+Thus the code you write with, for example, C<perl5i::2> will always
 remain compatible even as perl5i moves on.
 
 If you want to be daring, you can C<use perl5i::latest> to get the
 latest version.
 
 If you want your module to depend on perl5i, you should depend on the
-versioned class.  For example, depend on C<perl5i::1> and not
+versioned class.  For example, depend on C<perl5i::2> and not
 C<perl5i>.
 
 See L</VERSIONING> for more information about perl5i's versioning
@@ -118,13 +118,6 @@ functionality without polluting the global namespace.
 
 L<autobox::Core> wraps a lot of Perl's built in functions so they can
 be called as methods on unblessed variables.  C<< @a->pop >> for example.
-
-=head3 perl()
-
-L<autobox::dump> defines a C<perl> method that returns L<Data::Dumper>
-style serialization of the results of the expression.  It should work
-on any scalar, list, hash or reference.
-
 
 =head2 alias()
 
@@ -284,20 +277,22 @@ Returns true if $thing is a decimal number.
     ".34"->is_decimal;          # true
     "point five"->is_decimal;   # false
 
-=head2 load()
+=head2 require
 
-    $module->load(@args);
-    $path->load(@args);
+    my $module = $module->require;
 
-A thin wrapper around C<Module::Load::load()>.  It will load a module
-from a scalar without requiring you to do funny things like C<eval
-require $module>.  It accepts both module names and file paths.
+Will C<require> the given $module.  This avoids funny things like
+C<eval qq[require $module] or die $@>.  It accepts only module names.
+
+On failure it will throw an exception, just like C<require>.  On a
+success it returns the $module.  This is mostly useful so that you can
+immediately call $module's C<import> method to emulate a C<use>.
 
     # like "use $module qw(foo bar);" if that worked
-    $module->load(qw(foo bar));
+    $module->require->import(qw(foo bar));
 
-Note that C<< $module->load >> does not import anything.  This may
-change in the future.
+    # like "use $module;" if that worked
+    $module->require->import;
 
 =head3 wrap()
 
@@ -473,6 +468,24 @@ It also works with nested hashes, although it won't attempt to merge
 array references or objects. For more information, look at the
 L<Hash::Merge::Simple> docs.
 
+=head3 diff()
+
+    my %staff    = ( bob => 42, martha => 35, timmy => 23 );
+    my %promoted = ( timmy => 23 );
+
+    %staff->diff(\%promoted); # { bob => 42, martha => 35 }
+
+Returns the key/value pairs present in the first hash that are not
+present in the subsequent hash arguments.  Otherwise works as
+C<< @array->diff >>.
+
+=head3 intersect()
+
+    %staff->intersect(\%promoted); # { timmy => 23 }
+
+Returns the key/value pairs that are present simultaneously in all the
+hash arguments.  Otherwise works as C<< @array->intersect >>.
+
 =head2 caller()
 
 L<Perl6::Caller> causes C<caller> to return an object in scalar
@@ -553,15 +566,9 @@ objects.  They will all act like the core functions.
 
 =head2 Time::y2038
 
-C<gmtime()> and C<localtime()> will now safely work with dates beyond the
-year 2038 and before 1901 (the exact range is not defined, but it's
-well into a couple million years in either direction).
-
-
-=head2 Module::Load
-
-L<Module::Load> adds C<load> which will load a module from a scalar
-without requiring you to do funny things like C<eval require $module>.
+C<gmtime()> and C<localtime()> will now safely work with dates beyond
+the year 2038 and before 1901.  The exact range is not defined, but we
+guarantee at least up to 2**47 and back to year 1.
 
 
 =head2 IO::Handle
@@ -595,6 +602,15 @@ L<autovivification> fixes the bug/feature where this:
 
 Results in C<< $hash->{key1} >> coming into existence.  That will no longer
 happen.
+
+=head2 No indirect object syntax
+
+perl5i turns indirect object syntax, ie. C<new $obj>, into a compile
+time error.  Indirect object syntax is largely unnecessary and
+removing it avoids a number of ambiguous cases where Perl will
+mistakenly try to turn a function call into an indirect method call.
+
+See L<indirect> for details.
 
 =head2 want()
 
