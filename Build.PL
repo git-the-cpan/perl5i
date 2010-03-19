@@ -12,7 +12,7 @@ my $builder = MyBuild->new(
     module_name => 'perl5i',
     license     => 'perl',
     dist_author => 'Michael G Schwern <schwern@pobox.com>',
-    dist_version => 'v2.0.2',
+    dist_version => "v2.0.3",
 
     requires => {
         'perl'                    => '5.10.0',
@@ -42,12 +42,13 @@ my $builder = MyBuild->new(
         indirect              => '0.19',
         'JSON'                => '2.17',
         'YAML::Any'           => '0.70',
+        'Digest::SHA1'        => '2.09',
+        'Digest::MD5'         => '2.36',
     },
     build_requires => {
         'ExtUtils::CBuilder' => '0.26',
         'Test::More'         => '0.88',
         'Test::Warn'         => '0.11',
-        'Test::Exception'    => '0.27',
         'IPC::Open3'         => '0',
         'Test::Output'       => '0.16',
     },
