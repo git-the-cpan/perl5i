@@ -38,27 +38,27 @@ sub grep {
 
 sub all {
     require List::MoreUtils;
-    return List::MoreUtils::all($_[1], @{$_[0]});
+    return &List::MoreUtils::all($_[1], @{$_[0]});
 }
 
 sub any {
     require List::MoreUtils;
-    return List::MoreUtils::any($_[1], @{$_[0]});
+    return &List::MoreUtils::any($_[1], @{$_[0]});
 }
 
 sub none {
     require List::MoreUtils;
-    return List::MoreUtils::none($_[1], @{$_[0]});
+    return &List::MoreUtils::none($_[1], @{$_[0]});
 }
 
 sub true {
     require List::MoreUtils;
-    return List::MoreUtils::true($_[1], @{$_[0]});
+    return &List::MoreUtils::true($_[1], @{$_[0]});
 }
 
 sub false {
     require List::MoreUtils;
-    return List::MoreUtils::false($_[1], @{$_[0]});
+    return &List::MoreUtils::false($_[1], @{$_[0]});
 }
 
 sub uniq {
@@ -75,7 +75,7 @@ sub minmax {
 
 sub mesh {
     require List::MoreUtils;
-    my @mesh = List::MoreUtils::zip(@_);
+    my @mesh = &List::MoreUtils::zip(@_);
     return wantarray ? @mesh : \@mesh;
 }
 
@@ -195,6 +195,30 @@ sub intersect {
     }
 
     return wantarray ? @$base : $base;
+}
+
+sub ltrim {
+    my ($array, $charset) = @_;
+
+    my @result = CORE::map { $_->ltrim($charset) } @$array;
+
+    return wantarray ? @result : \@result;
+}
+
+sub rtrim {
+    my ($array, $charset) = @_;
+
+    my @result = CORE::map { $_->rtrim($charset) } @$array;
+
+    return wantarray ? @result : \@result;
+}
+
+sub trim {
+    my ($array, $charset) = @_;
+
+    my @result = CORE::map { $_->trim($charset) } @$array;
+
+    return wantarray ? @result : \@result;
 }
 
 

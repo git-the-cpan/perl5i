@@ -1,3 +1,23 @@
+2.1.0  Fri Apr 16 12:15:10 EEST 2010
+  New Features
+  * trim, ltrim and rtrim now work on arrays.  [github 121] (Nick Patch)
+
+  Fixes
+  * Quiet a warning in DateTime.pm on systems where gmtime() returns
+    undef for out of bound times (mostly Windows).
+  * Fix the perl5i command line tool on stock OS X 5.10.0 [github 116]
+  * Fix perl5i.bat on Windows.
+  * perl5i can load after List::MoreUtils (and thus things like Moose)
+    [github 127]
+  * Fix is_integer() and is_decimal() for things like 1.0 and 1.
+    [github 123]
+  * Fix rounding of negative numbers. [github 118]
+
+  Test Fixes
+  * Quiet the autodie test on Windows [github 126]
+  * Fix the quoting of command_line_wrapper.t for Windows [github 126]
+
+
 2.0.3  Fri Mar 19 13:57:37 PDT 2010
   Fixes
   * Forgot to require B before using a B routine in the JSON dump.

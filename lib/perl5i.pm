@@ -26,6 +26,8 @@ END
 
 __END__
 
+=encoding utf8
+
 =head1 NAME
 
 perl5i - Fix as much of Perl 5 as possible in one pragma
@@ -206,9 +208,10 @@ Round to the nearest integer.
 
     my $new_number = $number->round_up;
 
-Rounds the $number up.
+Rounds the $number towards infinity.
 
-    2.45->round_up;  # 3
+    2.45->round_up;   # 3
+  (-2.45)->round_up;  # -2
 
 ceil() is a synonym for round_up().
 
@@ -219,9 +222,10 @@ ceil() is a synonym for round_up().
 
     my $new_number = $number->round_down;
 
-Rounds the $number down.
+Rounds the $number towards negative infinity.
 
-    2.45->round_down; # 2
+    2.45->round_down;  # 2
+  (-2.45)->round_down; # -3
 
 floor() is a synonyn for round_down().
 
@@ -424,6 +428,28 @@ present in all of the argument arrays simultaneously.
 As with C<diff()>, it works with any number of arrays, nested data
 structures of arbitrary depth, and handles overloaded objects
 graciously.
+
+=head3 ltrim()
+
+=head3 rtrim()
+
+=head3 trim()
+
+    my @trimmed = @list->trim;
+    my @trimmed = @list->trim($character_set);
+
+Trim whitespace from each element of an array.  Each works just like
+their scalar counterpart.
+
+    my @trimmed = [ '   foo', 'bar   ' ]->ltrim;  # [ 'foo', 'bar   ' ]
+    my @trimmed = [ '   foo', 'bar   ' ]->rtrim;  # [ '   foo', 'bar' ]
+    my @trimmed = [ '   foo', 'bar   ' ]->trim;   # [ 'foo', 'bar'    ]
+
+As with the scalar trim() methods, they all take an optional $character_set
+which will determine what characters should be trimmed.
+
+    my @trimmed = ['-> foo <-', '-> bar <-']->trim('-><'); # [' foo ', ' bar ']
+
 
 =head2 Hash Autoboxing
 
