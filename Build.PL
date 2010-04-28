@@ -12,7 +12,7 @@ my $builder = MyBuild->new(
     module_name => 'perl5i',
     license     => 'perl',
     dist_author => 'Michael G Schwern <schwern@pobox.com>',
-    dist_version => "v2.1.0",
+    dist_version => "v2.1.1",
 
     requires => {
         'perl'                    => '5.10.0',
@@ -33,7 +33,7 @@ my $builder = MyBuild->new(
         'autobox::dump'       => '20090426',            # for perl5i::1
         'autobox::List::Util' => '20090629',
         'Want'                => '0.18',
-        'autovivification'    => '0.05',
+        'autovivification'    => '0.06',
         'version'             => '0.77',
         'Perl6::Caller'       => '0.100',
         "Taint::Util"         => '0.06',
