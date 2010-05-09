@@ -12,6 +12,13 @@ use perl5i::2::autobox;
 
 use parent qw(perl5i::2::Meta);
 
+sub id {
+    require Object::ID;
+
+    # Hash::FieldHash cannot handle non-references
+    return Object::ID::object_id(ref ${$_[0]} ? ${$_[0]} : $_[0]);
+}
+
 sub class {
     return ref ${$_[0]};
 }
@@ -31,8 +38,17 @@ my $has_string_overload = sub {
 sub is_tainted {
     my $code;
 
-    if( $code = $_[0]->$has_string_overload ) {
-        require Taint::Util;
+    require Taint::Util;
+
+    if( !ref ${$_[0]} ) {
+        # Its a plain scalar
+        return Taint::Util::tainted(${$_[0]});
+    }
+    elsif( ref ${$_[0]} eq 'SCALAR' ) {
+        # Unblessed scalar
+        return Taint::Util::tainted(${${$_[0]}});
+    }
+    elsif( $code = $_[0]->$has_string_overload ) {
         return Taint::Util::tainted( $code->(${$_[0]}) );
     }
     else {
@@ -44,7 +60,13 @@ sub is_tainted {
 
 
 sub taint {
-    if( $_[0]->$has_string_overload ) {
+    require Taint::Util;
+
+    if( !ref ${$_[0]} ) {
+        # Its a plain scalar
+        return Taint::Util::taint(${$_[0]});
+    }
+    elsif( $_[0]->$has_string_overload ) {
         Carp::croak "Untainted overloaded objects cannot normally be made tainted" if
           !$_[0]->is_tainted;
         return 1;
@@ -58,7 +80,13 @@ sub taint {
 
 
 sub untaint {
-    if( $_[0]->$has_string_overload && $_[0]->is_tainted ) {
+    require Taint::Util;
+
+    if( !ref ${$_[0]} ) {
+        # Its a plain scalar
+        return Taint::Util::untaint(${$_[0]});
+    }
+    elsif( $_[0]->$has_string_overload && $_[0]->is_tainted ) {
         Carp::croak "Tainted overloaded objects cannot normally be untainted";
     }
     else {

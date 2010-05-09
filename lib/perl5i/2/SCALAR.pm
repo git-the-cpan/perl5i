@@ -84,30 +84,17 @@ sub wrap {
 }
 
 
-# untaint the scalar itself, not the reference
+# Compatiblity wrappers. Remove in 3.0.
 sub untaint {
-    return $_[0]->mo->untaint if ref $_[0];
-
-    require Taint::Util;
-    Taint::Util::untaint($_[0]);
-    return 1;
+    return $_[0]->mo->untaint;
 }
 
-
-# untaint the scalar itself, not the reference
 sub taint {
-    return $_[0]->mo->taint if ref $_[0];
-
-    require Taint::Util;
-    Taint::Util::taint($_[0]);
-    return 1;
+    return $_[0]->mo->taint;
 }
 
-# Could use the version in Meta but this removes the need to check
-# for overloading.
 sub is_tainted {
-    require Taint::Util;
-    return ref $_[0] ? Taint::Util::tainted(${$_[0]}) : Taint::Util::tainted($_[0]);
+    return $_[0]->mo->is_tainted;
 }
 
 
@@ -170,6 +157,80 @@ sub is_decimal          {
 
     # Final gate for tricky things like 1.0, 1. and .0
     return $_[0] =~ m{^ [+-]? (?: \d+\.\d* | \.\d+ ) $}x;
+}
+
+sub group_digits {
+    my($self, $opts) = @_;
+
+    state $defaults = {
+        thousands_sep   => ",",
+        grouping        => 3,
+        decimal_point   => ".",
+    };
+
+    my $is_money = $opts->{currency};
+    my $sep           = $opts->{separator}     // (_get_from_locale("thousands_sep", $is_money)
+                                                   || $defaults->{thousands_sep});
+    my $grouping      = $opts->{grouping}      // (_get_grouping($is_money)
+                                                   || $defaults->{grouping});
+    my $decimal_point = $opts->{decimal_point} // (_get_from_locale("decimal_point", $is_money) 
+                                                   || $defaults->{decimal_point});
+    return $self if $grouping == 0;
+
+    my($integer, $decimal) = split m{\.}, $self, 2;
+
+    $integer = reverse $integer;
+    $integer =~ s/(\d{$grouping})(?=\d)(?!\d*\.)/$1$sep/g;
+    $integer = reverse $integer;
+
+    my $number = $integer;
+    $number .= $decimal_point . $decimal if defined $decimal;
+
+    return $number;
+}
+
+sub commify {
+    my($self, $args) = @_;
+
+    state $defaults = {
+        separator       => ",",
+        grouping        => 3,
+        decimal_point   => ".",
+    };
+
+    my $opts = $defaults->merge($args);
+
+    return $self->group_digits( $opts );
+}
+
+
+sub _get_lconv {
+    return eval {
+        require POSIX;
+        POSIX::localeconv();
+    } || {};
+}
+
+sub _get_grouping {
+    my $is_money = shift;
+    my $key = $is_money ? "mon_grouping" : "grouping";
+
+    my $lconv = _get_lconv;
+
+    if( $lconv->{$key} ) {
+        return (unpack("C*", $lconv->{$key}))[0];
+    }
+    else {
+        return;
+    }
+}
+
+sub _get_from_locale {
+    my($key, $is_money) = @_;
+    $key = "mon_$key" if $is_money;
+
+    my $lconv = _get_lconv;
+    return $lconv->{$key};
 }
 
 

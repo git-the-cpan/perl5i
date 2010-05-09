@@ -10,7 +10,8 @@ perl5i::Meta - The perl5i meta object
     use perl5i;
 
     my $id      = $object->mo->id;
-    my $class   = $object->mo->class;
+    my $class   = $object->mc->class;
+    my $tainted = $object->mo->is_tainted;
     ...and so on...
 
 
@@ -18,8 +19,8 @@ perl5i::Meta - The perl5i meta object
 
 Each object has a meta object which can be used to describe and
 sometimes alter the object.  This is for things which are common to
-*all* objects.  For example, C<< $obj->mo->id >> for a universal
-object identifier.  C<<@ISA = $obj->mo->ISA >> to get an object's
+*all* objects.  For example, C<< $obj->mc->class >> to get the
+object's class.  C<< @ISA = $obj->mc->ISA >> to get an object's
 parents.  And so on.
 
 
@@ -61,6 +62,18 @@ name.
 
 
 =head1 METHODS
+
+=head2 id
+
+    my $id = $object->mo->id;
+
+Returns an identifer for $object.
+
+The identifier is guaranteed to be:
+
+  * unique to the object for the life of the process
+  * a true value
+  * independent of changes to the object's contents
 
 =head2 class
 

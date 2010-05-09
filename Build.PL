@@ -12,7 +12,7 @@ my $builder = MyBuild->new(
     module_name => 'perl5i',
     license     => 'perl',
     dist_author => 'Michael G Schwern <schwern@pobox.com>',
-    dist_version => "v2.1.1",
+    dist_version => "v2.2.0",
 
     requires => {
         'perl'                    => '5.10.0',
@@ -25,8 +25,8 @@ my $builder = MyBuild->new(
         'Text::Wrap'              => '2009.0305',
         'Try::Tiny'               => '0.02',
         'autodie'                 => '1.999',
-        # Needed for autodie :system
-        'IPC::System::Simple' => '1.18',
+        'IPC::System::Simple' => '1.18',                # Needed for autodie :system
+        'autobox'             => '2.70',
         'autobox::Core'       => '1.0',
         parent                => '0.221',
         'File::chdir'         => '0.1002',
@@ -44,6 +44,7 @@ my $builder = MyBuild->new(
         'YAML::Any'           => '0.70',
         'Digest::SHA1'        => '2.09',
         'Digest::MD5'         => '2.36',
+        'Object::ID'          => '0.1.0',
     },
     build_requires => {
         'ExtUtils::CBuilder' => '0.26',
