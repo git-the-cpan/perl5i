@@ -64,29 +64,13 @@ sub import {
     (\&stat)->alias( $caller, 'stat' );
     (\&lstat)->alias( $caller, 'lstat' );
     (\&utf8_open)->alias($caller, 'open');
-
-    # fix die so that it always returns 255
-    *CORE::GLOBAL::die = sub {
-        # Leave a single ref be
-        local $! = 255;
-        return CORE::die(@_) if @_ == 1 and ref $_[0];
-
-        my $error = join '', @_;
-        unless ($error =~ /\n$/) {
-            my ($file, $line) = (caller)[1,2];
-            $error .= " at $file line $line.\n";
-        }
-
-        local $! = 255;
-        return CORE::die($error);
-    };
-
+    (\&perl5i_die)->alias($caller, "die");
 
     # utf8ify @ARGV
     $_ = Encode::decode('utf8', $_) for @ARGV;
 
-
-    $^H{perl5i} = 1;
+    # Current lexically active major version of perl5i.
+    $^H{perl5i} = 2;
 
     # autodie needs a bit more convincing
     @_ = ( $class, ":all" );
@@ -110,6 +94,23 @@ sub utf8_open(*;$@) {  ## no critic (Subroutines::ProhibitSubroutinePrototypes)
     my $h = (caller 1)[10];
     binmode $_[0], ":encoding(utf8)" if $h->{perl5i};
     return $ret;
+}
+
+
+# fix die so that it always returns 255
+sub perl5i_die {
+    # Leave a single ref be
+    local $! = 255;
+    return CORE::die(@_) if @_ == 1 and ref $_[0];
+
+    my $error = join '', @_;
+    unless ($error =~ /\n$/) {
+        my ($file, $line) = (caller)[1,2];
+        $error .= " at $file line $line.\n";
+    }
+
+    local $! = 255;
+    return CORE::die($error);
 }
 
 
