@@ -5,7 +5,7 @@ use perl5i::latest;
 use Config;
 use ExtUtils::CBuilder;
 use File::Spec;
-use File::Temp qw(tempfile);
+use File::Temp qw(tempdir tempfile);
 
 use Test::More;
 
@@ -49,11 +49,12 @@ is `$perl5icmd -e 'print __FILE__'`, "-e", '__FILE__ preserved';
 
 # And from a file
 {
-    my($fh, $file) = tempfile;
+    my $dir = tempdir("perl5i-turd-XXXX", CLEANUP => 1, TMPDIR => 1);
+    my($fh, $file) = tempfile(DIR => $dir);
     print $fh "say 'Hello';";
     close $fh;
 
     is `$perl5icmd $file`, "Hello\n", "program in a file";
 }
 
-done_testing(13);
+done_testing;

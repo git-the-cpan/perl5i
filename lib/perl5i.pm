@@ -111,6 +111,100 @@ C<mo> was chosen to avoid clashing with Moose's meta object.
 See L<perl5i::Meta> for complete details.
 
 
+=head2 Subroutine and Method Signatures
+
+perl5i makes it easier to declare what parameters a subroutine takes.
+
+    def add($this, $that) {
+        return $this + $that;
+    }
+
+    func hello($place) {
+        say "Hello, $place!\n";
+    }
+
+    method get($key) {
+        return $self->{$key};
+    }
+
+    method new($class: %args) {
+        return bless \%args, $class;
+    }
+
+C<def> and C<func> both define a subroutine as C<sub> does.  One of
+them will be deprecated in version 3 after its decided which folks
+prefer.
+
+The signature syntax is currently very simple.  The content will be
+assigned from @_.  This:
+
+    def add($this, $that) {
+        return $this + $that;
+    }
+
+is equivalent to:
+
+    sub add {
+        my($this, $that) = @_;
+        return $this + $that;
+    }
+
+C<method> defines a method.  This is the same as a subroutine, but the
+first argument, the I<invocant>, will be removed and made into
+C<$self>.
+
+    method get($key) {
+        return $self->{$key};
+    }
+
+    sub get {
+        my $self = shift;
+        my($key) = @_;
+        return $self->{$key};
+    }
+
+Methods have a special bit of syntax.  If the first item in the
+siganture is C<$var:> it will change the variable used to store the
+invocant.
+
+    method new($class: %args) {
+        return bless $class, \%args;
+    }
+
+is equivalent to:
+
+    sub new {
+        my $class = shift;
+        my %args = @_;
+        return bless $class, \%args;
+    }
+
+Guarantees include:
+
+  @_ will not be modified except by removing the invocant
+
+Future versions of perl5i will add to the signature syntax and
+capabilities.  Planned expansions include:
+
+  Signature validation
+  Signature documentation
+  Queryable signatures
+  Named parameters
+  Required parameters
+  Read only parameters
+  Aliased parameters
+  Anonymous method and function declaration
+  Variable method and function names
+  Parameter traits
+  Traditional prototypes
+
+See L<http://github.com/schwern/perl5i/issues/labels/syntax#issue/19> for
+more details about future expansions.
+
+The equivalencies above should only be taken for illustrative
+purposes, they are not guaranteed to be literally equivalent.
+
+
 =head2 Autoboxing
 
 L<autobox> allows methods to be defined for and called on most
@@ -724,6 +818,65 @@ of $@ and a nice syntax layer:
         };
 
 See perldoc L<Try::Tiny> for details.
+
+=head2 Block::NamedVar
+
+L<Block::NamedVar> provides the 'ngrep', 'nmap', and 'nfor' keywords. These act
+like 'grep', 'map', and 'for', The difference is that you specify the names of
+the block variables. In the case of 'nfor' you can iterate over chunks of your
+list at a time.
+
+=head3 ngrep
+
+    # grep with lexical $x.
+    @list = ngrep my $x { $x =~ m/^[a-zA-Z]$/ } @stuff;
+
+    # grep with package variable $v
+    @list = ngrep our $v { $v =~ m/^[a-zA-Z]$/ } @stuff;
+
+    # grep with closure over existing $y
+    my $y;
+    @list = ngrep $y { $y =~ m/^[a-zA-Z]$/ } @stuff;
+
+=head3 nmap
+
+Behaves just like ngrep with lexical, package, or closure variables.
+
+    # map with lexical $x
+    @list = nmap my $x { "updated_$x" } @stuff;
+
+=head3 nfor
+
+Works like for, you can even use 'last' and 'next'.
+
+    # Iterate a hash taking key and value each pass:
+    nfor my ( $key, $value ) ( %a_hash ) {
+        next if $key eq "_hidden";
+        print $key, " = ", $value, "\n";
+        last if ...;
+    }
+
+    # Defaults to $a and $b:
+    nfor ( %a_hash ) {
+        print $a, " = ", $b, "\n";
+    }
+
+    # Iterate over 3 or more elements of the list per pass:
+    nfor my ( $x, $y, $z ) ( qw/a b c d e f/ ) {
+        # Will be run twice.
+    }
+
+=head2 Better load errors
+
+Most of us have learned the meaning of the dreaded "Can't locate Foo.pm in
+@INC". Admittedly though, it's not the most helpful of the error messages. In
+perl5i we provide a much friendlier error message.
+
+Example:
+
+    Can't locate My/Module.pm in your Perl library.  You may need to install it
+    from CPAN or another repository.  Your library paths are:
+        Indented list of paths, 1 per line...
 
 =head1 Command line program
 

@@ -5,6 +5,10 @@ use 5.010;
 
 use strict;
 use warnings;
+
+#This should come first
+use perl5i::2::RequireMessage;
+
 use IO::Handle;
 use Carp;
 use perl5i::2::DateTime;
@@ -45,7 +49,8 @@ sub import {
     load_in_caller( $caller => (
         ["CLASS"], ["File::chdir"],
         [English => qw(-no_match_vars)],
-        ["Want" => qw(want)], ["Try::Tiny"], ["Perl6::Caller"], ["Carp"]
+        ["Want" => qw(want)], ["Try::Tiny"], ["Perl6::Caller"], ["Carp"],
+        ['Block::NamedVar'], ['perl5i::2::Signatures'],
     ) );
 
     # Have to call both or it won't work.
