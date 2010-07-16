@@ -1,3 +1,12 @@
+2.3.0_02  Thu Jul 15 19:13:22 PDT 2010
+  New Features
+  * Signature introspection, via $code->signature, for subroutines defined
+    with C<def>, C<func> and C<method>.
+
+  Documentation
+  * Anonymous methods and functions (they always worked)
+
+
 2.3.0_01  Mon Jul 12 16:15:05 PDT 2010
   New Features
   * ngrep and nmap are like grep and map but you can name the $_ variable.
