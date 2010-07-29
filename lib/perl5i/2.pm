@@ -50,7 +50,8 @@ sub import {
         ["CLASS"], ["File::chdir"],
         [English => qw(-no_match_vars)],
         ["Want" => qw(want)], ["Try::Tiny"], ["Perl6::Caller"], ["Carp"],
-        ['Block::NamedVar'], ['perl5i::2::Signatures'],
+        ['perl5i::2::Signatures'],
+        ['Child' => qw(child)],
     ) );
 
     # Have to call both or it won't work.

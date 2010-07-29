@@ -117,6 +117,8 @@ Here are some ways to do traditional Perl 5 things the perl5i way.
   $thing->is_positive;   # it's a positive number
   $thing->is_negative;   # it's a negative number
   $thing->is_integer;    # it's an integer, no decimal part
+  $thing->is_even;       # it's an even integer
+  $thing->is_odd;        # it's an odd integer
   $thing->is_decimal;    # it's a decimal number
 
 This will work even if $thing is a reference (they will all return
@@ -128,6 +130,18 @@ false).
   my @diff = @array1->diff(\@array2);
 
 Will return the elements in @array1 which are not in @array2.
+
+
+=head2 How do I iterate through an array more than one at a time?
+
+Pass the C<foreach> method a function which takes more than one
+parameter.  C<foreach> will iterate over the appropriate number of
+items.
+
+  # Iterate two at a time.
+  @array->foreach( func($x,$y) { say "x: $x, y: $y" };
+
+See L<perl5i/foreach> for details.
 
 
 =head2 How do I get information about the current date?
@@ -237,7 +251,7 @@ The $CLASS variable and CLASS constant are exported by perl5i and it
 contains the name of the current class.
 
     CLASS->class_method(@args);
-    print "OMG! You're using class $CLASS.\n";
+    say "OMG! You're using class $CLASS.";
 
 See L<per5i/CLASS> for details.
 
@@ -258,7 +272,7 @@ before returning.  perl5i provides C<local $CWD> to accomplish this.
 
     chdir "/some/path";
     do_things();  # do_things operates in /some/path/some/subdir
-    print $CWD;   # prints /some/path
+    say $CWD;   # prints /some/path
 
 Even if the code in do_things() dies, it will still return to the
 original directory.

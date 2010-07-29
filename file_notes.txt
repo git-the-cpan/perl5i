@@ -11,6 +11,7 @@ File and Dir objects are in general...
     * immutable
         * exceptions include volume, type, encoding, cleanup and any caching
     * throw exceptions
+        * exceptions can be introspected to get errno
 
 
 Modules surveyd for ideas:
@@ -77,7 +78,7 @@ SCALAR->file
 SCALAR->dir
         $file = $string->file;
         $dir = $string->dir;
-            type (win32, vms, unix, url) (default unix)
+            type (win32, vms, unix, url, native) (default unix)
 
 ARRAY->file
 ARRAY->dir
@@ -339,4 +340,5 @@ auto_delete
         Essentially turning it into a temp directory
         $file->auto_delete(1);
         $dir->auto_delete(1);
-
+compare
+diff

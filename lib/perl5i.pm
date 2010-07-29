@@ -115,10 +115,6 @@ See L<perl5i::Meta> for complete details.
 
 perl5i makes it easier to declare what parameters a subroutine takes.
 
-    def add($this, $that) {
-        return $this + $that;
-    }
-
     func hello($place) {
         say "Hello, $place!\n";
     }
@@ -131,14 +127,13 @@ perl5i makes it easier to declare what parameters a subroutine takes.
         return bless \%args, $class;
     }
 
-C<def> and C<func> both define a subroutine as C<sub> does.  One of
-them will be deprecated in version 3 after its decided which folks
-prefer.
+C<func> and C<method> define subroutines as C<sub> does, with some
+extra conveniences.
 
 The signature syntax is currently very simple.  The content will be
 assigned from @_.  This:
 
-    def add($this, $that) {
+    func add($this, $that) {
         return $this + $that;
     }
 
@@ -181,7 +176,7 @@ is equivalent to:
 
 Anonymous functions and methods work, too.
 
-    my $code = def($message) { say $message };
+    my $code = func($message) { say $message };
 
 Guarantees include:
 
@@ -211,7 +206,7 @@ Note that while all parameters are optional by default, the number of
 parameters will eventually be enforced.  For example, right now this
 will work:
 
-    def add($this, $that) { return $this + $that }
+    func add($this, $that) { return $this + $that }
 
     say add(1,2,3);  # says 3
 
@@ -221,14 +216,13 @@ be a runtime error.
 
 =head3 Signature Introspection
 
-The signature of a subroutine defined with C<def>, C<func> or
-C<method> can be queried by calling the C<signature> method on the
-code reference.
+The signature of a subroutine defined with C<func> or C<method> can be
+queried by calling the C<signature> method on the code reference.
 
     func hello($greeting, $place) { say "$greeting, $place" }
 
     my $code = \&hello;
-    say $code->signature->num_params;  # prints 2
+    say $code->signature->num_positional_params;  # prints 2
 
 Functions defined with C<sub> will not have a signature.
 
@@ -256,7 +250,7 @@ Aliases a variable to a new global name.
 
     my $code = sub { 42 };
     $code->alias( "foo" );
-    print foo();        # prints 42
+    say foo();        # prints 42
 
 It will work on everything except scalar references.
 
@@ -277,7 +271,7 @@ qualified name for the alias.
     my $class = "Some::Class";
     my $name  = "foo";
     sub { 99 }->alias( $class, $name );
-    print Some::Class->foo;  # prints 99
+    say Some::Class->foo;  # prints 99
 
 If there is just one @identifier and it has no "::" in it, the current
 caller will be prepended.  C<< $thing->alias("name") >> is shorthand for
@@ -379,6 +373,18 @@ Returns true if $thing is a positive number.
 Returns true if $thing is a negative number.
 
 0 is not negative.
+
+=head3 is_even
+
+    $is_even = $thing->is_even;
+
+Returns true if $thing is an even integer.
+
+=head3 is_odd
+
+    $is_odd = $thing->is_odd;
+
+Returns true if $thing is an odd integer.
 
 =head3 is_integer
 
@@ -560,6 +566,30 @@ order to allow chaining.
 
     @array->grep(sub{ $_->is_number })->sum->say;
 
+=head3 foreach()
+
+    @array->foreach( func($item) { ... } );
+
+Works like the built in C<foreach>, calls the code block for each
+element of @array passing it into the block.
+
+    @array->foreach( func($item) { say $item } );  # print each item
+
+It will pass in as many elements as the code block accepts.  This
+allows you to iterate through an array 2 at a time, or 3 or 4 or
+whatever.
+
+    my @names = ("Joe", "Smith", "Jim", "Dandy", "Jane", "Lane");
+    @names->foreach( func($fname, $lname) {
+        say "Person: $fname $lname";
+    });
+
+A normal subroutine with no signature will get one at a time.
+
+If @array is not a multiple of the iteration (for example, @array has
+5 elements and you ask 2 at a time) the behavior is currently undefined.
+
+
 =head3 diff()
 
 Calculate the difference between two (or more) arrays:
@@ -702,11 +732,12 @@ hash arguments.  Otherwise works as C<< @array->intersect >>.
 
     my $sig = $code->signature;
 
-You can query the signature of any code reference defined with C<def>,
-C<func> or C<method>.  See L<Signature Introspection>.
+You can query the signature of any code reference defined with C<func>
+or C<method>.  See L<Signature Introspection> for details.
 
-If C<$code> has a signature, returns an object representing C<$code>'s signature.  See
-L<perl5i::Signature> for details.  Otherwise it returns nothing.
+If C<$code> has a signature, returns an object representing C<$code>'s
+signature.  See L<perl5i::Signature> for details.  Otherwise it
+returns nothing.
 
 
 =head2 caller()
@@ -741,6 +772,60 @@ a file, such as outputting an image, you must set C<< binmode $fh >>.
 =head2 Carp
 
 C<croak> and C<carp> from L<Carp> are always available.
+
+=head2 Child
+
+L<Child> provides the C<child> function which is a better way to do forking.
+
+C<child> creates and starts a child process, and returns an
+L<Child::Link::Proc> object which is a better interface for managing the child
+process. The only required argument is a codeblock, which is called in the new
+process. exit() is automatically called for you after the codeblock returns.
+
+    my $proc = child {
+        my $parent = shift;
+        ...
+    };
+
+You can also request a pipe for IPC:
+
+    my $proc = child {
+        my $parent = shift;
+
+        $parent->say("Message");
+        my $reply = $parent->read();
+
+        ...
+    } pipe => 1;
+
+    my $message = $proc->read();
+    $proc->say("reply");
+
+API Overview: (See L<Child> for more information)
+
+=over 4
+
+=item $proc->is_complete()
+
+=item $proc->wait()
+
+=item $proc->kill($SIG)
+
+=item $proc->pid()
+
+=item $proc->exit_status()
+
+=item $parent->pid()
+
+=item $parent->detach()
+
+=item $proc_or_parent->read()
+
+=item $proc_or_parent->write( @MESSAGES )
+
+=item $proc_or_parent->say( @MESSAGES )
+
+=back
 
 =head2 English
 
@@ -862,52 +947,6 @@ of $@ and a nice syntax layer:
 
 See perldoc L<Try::Tiny> for details.
 
-=head2 Block::NamedVar
-
-L<Block::NamedVar> provides the 'ngrep', 'nmap', and 'nfor' keywords. These act
-like 'grep', 'map', and 'for', The difference is that you specify the names of
-the block variables. In the case of 'nfor' you can iterate over chunks of your
-list at a time.
-
-=head3 ngrep
-
-    # grep with lexical $x.
-    @list = ngrep my $x { $x =~ m/^[a-zA-Z]$/ } @stuff;
-
-    # grep with package variable $v
-    @list = ngrep our $v { $v =~ m/^[a-zA-Z]$/ } @stuff;
-
-    # grep with closure over existing $y
-    my $y;
-    @list = ngrep $y { $y =~ m/^[a-zA-Z]$/ } @stuff;
-
-=head3 nmap
-
-Behaves just like ngrep with lexical, package, or closure variables.
-
-    # map with lexical $x
-    @list = nmap my $x { "updated_$x" } @stuff;
-
-=head3 nfor
-
-Works like for, you can even use 'last' and 'next'.
-
-    # Iterate a hash taking key and value each pass:
-    nfor my ( $key, $value ) ( %a_hash ) {
-        next if $key eq "_hidden";
-        print $key, " = ", $value, "\n";
-        last if ...;
-    }
-
-    # Defaults to $a and $b:
-    nfor ( %a_hash ) {
-        print $a, " = ", $b, "\n";
-    }
-
-    # Iterate over 3 or more elements of the list per pass:
-    nfor my ( $x, $y, $z ) ( qw/a b c d e f/ ) {
-        # Will be run twice.
-    }
 
 =head2 Better load errors
 

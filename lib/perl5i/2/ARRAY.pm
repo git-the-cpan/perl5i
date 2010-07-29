@@ -5,11 +5,29 @@ use 5.010;
 use strict;
 use warnings;
 
+use Carp;
+
+use perl5i::2::Signatures;
 use perl5i::2::autobox;
 
-sub first {
-    my ( $array, $filter ) = @_;
+# A foreach which honors the number of parameters in the signature
+func foreach($array, $code) {
+    my $n = 1;
+    if( my $sig = $code->signature ) {
+        $n = $sig->num_positional_params;
+        croak "Function passed to foreach takes no arguments" unless $n;
+    }
 
+    my $idx = 0;
+    do {
+        $code->(@{$array}[$idx..($idx+$n-1)]);
+        $idx += $n;
+    } while $idx <= $#{$array};
+
+    return;
+}
+
+func first($array, $filter) {
     # Deep recursion and segfault (lines 90 and 91 in first.t) if we use
     # the same elegant approach as in grep().
     if ( ref $filter eq 'Regexp' ) {
@@ -20,17 +38,13 @@ sub first {
 
 }
 
-sub map {
-    my( $array, $code ) = @_;
-
+func map( $array, $code ) {
     my @result = CORE::map { $code->($_) } @$array;
 
     return wantarray ? @result : \@result;
 }
 
-sub grep {
-    my ( $array, $filter ) = @_;
-
+func grep($array, $filter) {
     my @result = CORE::grep { $_ ~~ $filter } @$array;
 
     return wantarray ? @result : \@result;
@@ -79,10 +93,8 @@ sub mesh {
     return wantarray ? @mesh : \@mesh;
 }
 
-my $diff_two_deeply = sub {
-    # Compare differences between two arrays.
-    my ($c, $d) = @_;
-
+# Compare differences between two arrays.
+my $diff_two_deeply = func($c, $d) {
     my $diff = [];
 
     # For each element of $c, try to find if it is equal to any of the
@@ -103,9 +115,7 @@ my $diff_two_deeply = sub {
     return $diff;
 };
 
-my $diff_two_simply = sub {
-    my ($c, $d) = @_;
-
+my $diff_two_simply = func($c, $d) {
     no warnings 'uninitialized';
     my %seen = map { $_ => 1 } @$d;
 
@@ -114,8 +124,7 @@ my $diff_two_simply = sub {
     return \@diff;
 };
 
-sub diff {
-    my ($base, @rest) = @_;
+func diff($base, @rest) {
     unless (@rest) {
         return wantarray ? @$base : $base;
     }
@@ -138,9 +147,7 @@ sub diff {
 }
 
 
-my $intersect_two_simply = sub {
-    my ($c, $d) = @_;
-
+my $intersect_two_simply = func($c, $d) {
     no warnings 'uninitialized';
     my %seen = map { $_ => 1 } @$d;
 
@@ -149,10 +156,8 @@ my $intersect_two_simply = sub {
     return \@intersect;
 };
 
-my $intersect_two_deeply = sub {
-    # Compare differences between two arrays.
-    my ($c, $d) = @_;
-
+# Compare differences between two arrays.
+my $intersect_two_deeply = func($c, $d) {
     require perl5i::2::equal;
 
     my $intersect = [];
@@ -174,9 +179,7 @@ my $intersect_two_deeply = sub {
     return $intersect;
 };
 
-sub intersect {
-    my ($base, @rest) = @_;
-
+func intersect($base, @rest) {
     unless (@rest) {
         return wantarray ? @$base : $base;
     }
@@ -197,25 +200,19 @@ sub intersect {
     return wantarray ? @$base : $base;
 }
 
-sub ltrim {
-    my ($array, $charset) = @_;
-
+func ltrim($array, $charset) {
     my @result = CORE::map { $_->ltrim($charset) } @$array;
 
     return wantarray ? @result : \@result;
 }
 
-sub rtrim {
-    my ($array, $charset) = @_;
-
+func rtrim($array, $charset) {
     my @result = CORE::map { $_->rtrim($charset) } @$array;
 
     return wantarray ? @result : \@result;
 }
 
-sub trim {
-    my ($array, $charset) = @_;
-
+func trim($array, $charset) {
     my @result = CORE::map { $_->trim($charset) } @$array;
 
     return wantarray ? @result : \@result;
