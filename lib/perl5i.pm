@@ -63,7 +63,7 @@ Because perl5i I<plans> to be incompatible in the future, you do not
 simply C<use perl5i>.  You must declare which major version of perl5i
 you are using.  You do this like so:
 
-    # Use perl5i major version 1
+    # Use perl5i major version 2
     use perl5i::2;
 
 Thus the code you write with, for example, C<perl5i::2> will always
@@ -946,6 +946,11 @@ of $@ and a nice syntax layer:
         };
 
 See perldoc L<Try::Tiny> for details.
+
+
+=head2 true
+
+You no longer have to put a true value at the end of a module which uses perl5i.
 
 
 =head2 Better load errors

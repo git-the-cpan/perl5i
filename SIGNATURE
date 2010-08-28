@@ -16,21 +16,21 @@ Hash: SHA1
 
 SHA1 b38d844144d8fd1d7273736c48f01106df558137 .perlcriticrc
 SHA1 f723872651f0cd52a4aca957af3536f931667340 .perltidyrc
-SHA1 efc04daa974a4d8ba9ce5a1d62bac1a1ec62d5f3 Build.PL
-SHA1 2ae37c1b29e6402601add797fe22fd0534fac5e3 Changes
+SHA1 7b3d9b00ab8c875cbfac62cdfc31f6c7232a5eba Build.PL
+SHA1 227eade6e8bdd751e9bf4bdc49a8681e17a962a4 Changes
 SHA1 e421537a09310e0e3b3fc430b50d85a0e9d42465 INSTALL.SKIP
 SHA1 e7bc66fca43fc9dba4c777e7a60ef6fc102a8b02 LICENSE
-SHA1 d3d0c6200ecb556a96115399aea28f5868b1c685 MANIFEST
+SHA1 323c11caf101d6c5640fd668a4be661d1755b94f MANIFEST
 SHA1 326b78d1c6467efb0f0eca16fbed6a4d09d89aac MANIFEST.SKIP
-SHA1 5a865fe0c1252d3893afc811f6aeda8924829fc8 META.yml
+SHA1 165a13b0f0a5964ed86c3490a91b2cd2c38e9f55 META.yml
 SHA1 f5b7718ad133f036cf62e6ba93bfb6e61572a4c0 PATCHING
-SHA1 721a6d856af5a6ad1b90fd92251fbccf90a56ffa README
+SHA1 85f91ea50a9333f823ef101b062516c522657135 README
 SHA1 1aacf26b617e212c197fc971d4f310d781a63cb9 bin/perl5i.bat.PL
 SHA1 669e8e04934906fd5dc114f891cda03d3008a4df bin/perl5i.c.PL
 SHA1 c2f623ee631640aebd3c9ee304c292c1cde9e115 bin/perl5i.plx
 SHA1 dc46f75caf47524cf71d030325c5a9cc4cb8b9a7 file_notes.txt
 SHA1 bdd9329cc7d5bf0430ea3b9908b2dd271339de60 inc/MyBuild.pm
-SHA1 6a0ef1b5532d8dd0847dd44d96ca7d0166981701 lib/perl5i.pm
+SHA1 d294690945b4f61bc7089f57b7e9d5fc18caa031 lib/perl5i.pm
 SHA1 bf814378c9005af01f474d3a0a7124d683364487 lib/perl5i/0.pm
 SHA1 03ab9768a7c07e28abd5a46be8246ba986a001f4 lib/perl5i/0/ARRAY.pm
 SHA1 f7d5bde84eae968c048101befa515cf7dc5131b1 lib/perl5i/0/DEFAULT.pm
@@ -51,7 +51,7 @@ SHA1 883eaac105a754a007f2cf67688c7f3d017996b8 lib/perl5i/1/Meta/Instance.pm
 SHA1 04ffa5ad0e8870265d4447cbfec4a458ae1969d1 lib/perl5i/1/SCALAR.pm
 SHA1 2a1d096958fdcef671e901c1c38c4646d533bbc8 lib/perl5i/1/UNIVERSAL.pm
 SHA1 3c5e3b33a81e92de285b515f4f89b76912ecc456 lib/perl5i/1/autobox.pm
-SHA1 7239ccd716a16ae4594eb3eb9541cb934283597d lib/perl5i/2.pm
+SHA1 2a56184d64f2c3760422e1e7610aab12a0cdc943 lib/perl5i/2.pm
 SHA1 379a73364893ad2bb3e4589e40c6cf15b76137eb lib/perl5i/2/ARRAY.pm
 SHA1 67ab683759eecfea3135e1656e4a77524e840922 lib/perl5i/2/CODE.pm
 SHA1 cb64a5676d1cc89ed57551ccdcc6ddd603704c54 lib/perl5i/2/DateTime.pm
@@ -59,7 +59,7 @@ SHA1 cead1bbc810f0f3a6ea08a48357345b394699b43 lib/perl5i/2/HASH.pm
 SHA1 9f1054c0ab9591993e8458596da5f63ae8e6f79f lib/perl5i/2/Meta.pm
 SHA1 d51e9b5d1cc2499c02e2e74755e52ad2c376b00f lib/perl5i/2/Meta/Class.pm
 SHA1 f64f765fa57d80f6e7729786dbe0243c404bef66 lib/perl5i/2/Meta/Instance.pm
-SHA1 918af626f5810bcd83b9a85104e0520121b233c4 lib/perl5i/2/RequireMessage.pm
+SHA1 86fa5d40aa0723682deb41a1345bf1e4dc36980c lib/perl5i/2/RequireMessage.pm
 SHA1 83c062fb237e6079cb9181ef7bf1fcfd6dbf4251 lib/perl5i/2/SCALAR.pm
 SHA1 c908ad0b7a97fdea562bb04a436278dede807d7b lib/perl5i/2/Signature.pm
 SHA1 8c4f81a68b490e92ef63812b9a969dcd111588e3 lib/perl5i/2/Signature/Function/None.pm
@@ -72,10 +72,10 @@ SHA1 dd478e14034c6e080729715a4234adab51b5af10 lib/perl5i/2/autobox.pm
 SHA1 5ab3a0a999b571d2ff15cd2ab0ab298e093c89c4 lib/perl5i/2/equal.pm
 SHA1 a108d7a9a89c7814ccdd114d71e728d4f2162a6d lib/perl5i/Meta.pm
 SHA1 6e4943b13b89f857d02c848847ed4d7496816c88 lib/perl5i/Signature.pm
-SHA1 e94431761bd73f32a9d565feb7e1e796fd58ccf4 lib/perl5i/VERSION.pm
+SHA1 a82ca314ad743afa487a84d4b310fdfc140dc338 lib/perl5i/VERSION.pm
 SHA1 30ab9bc777cf7ec651fa2d5bf4c6860a1aa86d79 lib/perl5i/cmd.pm
 SHA1 7eee47edc7738c801e3ab8ea9557b991fe0a734d lib/perl5i/latest.pm
-SHA1 d1cce7bf7b167e8f74515c4b854d59c08887fe81 lib/perl5ifaq.pod
+SHA1 7cd3eb45145980fdd72f3376666868d53687de61 lib/perl5ifaq.pod
 SHA1 990e85c3266a7d9127763929b71f51c332275fcb t/ARGV.t
 SHA1 59f2fb408a2657bde427dfb3da2611634824cfff t/CLASS.t
 SHA1 bf635e3b3f34c1a6b688867a58cc2cfec67c970d t/Child.t
@@ -129,6 +129,7 @@ SHA1 88e95b3c878f0b0f97ecb23e46efe3d7657da4f3 t/equal.t
 SHA1 f9d7cefbb4e827127846b1237cef0b6daaf3e0c2 t/everything_is_an_object.t
 SHA1 877506a1a3bf369681efda1088e186dc81169461 t/flip.t
 SHA1 d5405900321426d9888c994935ece1b886e71dfc t/foreach.t
+SHA1 84de180598dd1e41e6b3a1fddb495f8cb39ba34d t/github164.t
 SHA1 07982dae8573e4c90d2171f07dfbde49fe1d62ec t/grep.t
 SHA1 d2a5ebccce4b04e6e5da2e75fb6fed68aad0f134 t/hash-diff.t
 SHA1 c6e050b2ba9f91f51fec6586c8c104c282077323 t/hash-intersect.t
@@ -137,6 +138,7 @@ SHA1 b53507b0a3dae082bccef4aa1bca0b7028e6ba81 t/intersect.t
 SHA1 730463409da99a2878d6c6e2e0b69b4d3b65b48e t/io-handle.t
 SHA1 a3ae4795b6233c66cece291c376787d9675f9121 t/lexical.t
 SHA1 e10829ae920d040c6327c3319803bd710bafab57 t/lib/Test/perl5i.pm
+SHA1 d81a5833448a1fe358691f19d527c42433440e6b t/lib/ThisIsTrue.pm
 SHA1 6473a2e78846f710a3aaf268a6d41aa8af71e9c7 t/list-trim.t
 SHA1 d72a3c5210b079dc8c79c963f72b312d44934bc0 t/load_together.t
 SHA1 77a071110a2a1d7d637747039a2aa4ccbf9c9e2a t/map.t
@@ -147,13 +149,14 @@ SHA1 ab901ec08963d28100d6cea98826996d69afc621 t/no_indirect.t
 SHA1 854d339355b7fbc0d4b60e8e487e9f7dd5ff5840 t/number.t
 SHA1 df9deb06bea83eca7c118a8de7fda2ce5ca48e7a t/perl5i.t
 SHA1 7e49f472b8d6ccd8eb857fe2380d0324f12ba5d4 t/require.t
-SHA1 ac063bd3ad8adb80c3efc39b9d132839883ba655 t/require_message.t
+SHA1 55c8debbe1f977a2c595129b0cb8010f4495fbb9 t/require_message.t
 SHA1 2e1ebff1f7afdf5f31275abf1e2ba827bbf7c7ee t/say.t
 SHA1 45f2ad106ce4feba62c0658f27d9db076cfecaf1 t/scalar.t
 SHA1 378036382ffe51eabc5a716336c5da770edb9e35 t/signature.t
 SHA1 d4b3c6c027ce4c9499693cef8b02701c9ed5644b t/signatures.t
 SHA1 b53366faf1234bcaeb79eed6cabccaf33444d52f t/taint.t
 SHA1 7027c06599c9a3702ff94fe083bae5632940790c t/time_compat.t
+SHA1 01ee92a12246a9fa748d64d449a666bfa284e4f0 t/true.t
 SHA1 50494d642603c31dfd7ca367957d3b8bd1fe8bbc t/try-tiny.t
 SHA1 5c0615dceefa82c04e853ea0d5215cca64045201 t/utf8.t
 SHA1 50f73b2661272e821c9e22cb3e13088624031f58 t/version_0/00_compile.t
@@ -164,7 +167,7 @@ SHA1 513209d8bd9be29e5b9fafe997d626489e345c59 t/y2038.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.13 (Darwin)
 
-iEYEARECAAYFAkxTeWwACgkQWMohlhD1QyczMQCdHRgtV4sujFZ9/cBjcIgcmJGJ
-oSAAoMjAy8suUySm8KTV97LJbZ+PUeiG
-=5SR9
+iEYEARECAAYFAkx4ckoACgkQWMohlhD1QycegACfR23w1dY28Z9XjbxpgaRgOqTs
+1UkAnAi95MItijvOKrm5S22Vv2bQyGZ+
+=/y3N
 -----END PGP SIGNATURE-----
