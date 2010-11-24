@@ -14,15 +14,16 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
+SHA1 cabb356e64cf34f74887e8a3d715cb63312ca07d .DS_Store
 SHA1 b38d844144d8fd1d7273736c48f01106df558137 .perlcriticrc
 SHA1 f723872651f0cd52a4aca957af3536f931667340 .perltidyrc
-SHA1 7b3d9b00ab8c875cbfac62cdfc31f6c7232a5eba Build.PL
-SHA1 227eade6e8bdd751e9bf4bdc49a8681e17a962a4 Changes
+SHA1 4a434724aec3111ad97b6b440f8ce8b936af20c2 Build.PL
+SHA1 87fe14ec3a7663512b553e98f00d09744c3d0296 Changes
 SHA1 e421537a09310e0e3b3fc430b50d85a0e9d42465 INSTALL.SKIP
 SHA1 e7bc66fca43fc9dba4c777e7a60ef6fc102a8b02 LICENSE
-SHA1 323c11caf101d6c5640fd668a4be661d1755b94f MANIFEST
+SHA1 67a2cc6c3f5888f6c2d61cbca5ddd42eea818ca8 MANIFEST
 SHA1 326b78d1c6467efb0f0eca16fbed6a4d09d89aac MANIFEST.SKIP
-SHA1 165a13b0f0a5964ed86c3490a91b2cd2c38e9f55 META.yml
+SHA1 d00704a3b7add4fadbb6c5e73cc2a55547581f3b META.yml
 SHA1 f5b7718ad133f036cf62e6ba93bfb6e61572a4c0 PATCHING
 SHA1 85f91ea50a9333f823ef101b062516c522657135 README
 SHA1 1aacf26b617e212c197fc971d4f310d781a63cb9 bin/perl5i.bat.PL
@@ -59,7 +60,7 @@ SHA1 cead1bbc810f0f3a6ea08a48357345b394699b43 lib/perl5i/2/HASH.pm
 SHA1 9f1054c0ab9591993e8458596da5f63ae8e6f79f lib/perl5i/2/Meta.pm
 SHA1 d51e9b5d1cc2499c02e2e74755e52ad2c376b00f lib/perl5i/2/Meta/Class.pm
 SHA1 f64f765fa57d80f6e7729786dbe0243c404bef66 lib/perl5i/2/Meta/Instance.pm
-SHA1 86fa5d40aa0723682deb41a1345bf1e4dc36980c lib/perl5i/2/RequireMessage.pm
+SHA1 e1a52dcc88d305b13efb7409ebb57a3928f33e44 lib/perl5i/2/RequireMessage.pm
 SHA1 83c062fb237e6079cb9181ef7bf1fcfd6dbf4251 lib/perl5i/2/SCALAR.pm
 SHA1 c908ad0b7a97fdea562bb04a436278dede807d7b lib/perl5i/2/Signature.pm
 SHA1 8c4f81a68b490e92ef63812b9a969dcd111588e3 lib/perl5i/2/Signature/Function/None.pm
@@ -72,7 +73,7 @@ SHA1 dd478e14034c6e080729715a4234adab51b5af10 lib/perl5i/2/autobox.pm
 SHA1 5ab3a0a999b571d2ff15cd2ab0ab298e093c89c4 lib/perl5i/2/equal.pm
 SHA1 a108d7a9a89c7814ccdd114d71e728d4f2162a6d lib/perl5i/Meta.pm
 SHA1 6e4943b13b89f857d02c848847ed4d7496816c88 lib/perl5i/Signature.pm
-SHA1 a82ca314ad743afa487a84d4b310fdfc140dc338 lib/perl5i/VERSION.pm
+SHA1 e12a7703e325e61f082d3e5d3e54a64178373ef1 lib/perl5i/VERSION.pm
 SHA1 30ab9bc777cf7ec651fa2d5bf4c6860a1aa86d79 lib/perl5i/cmd.pm
 SHA1 7eee47edc7738c801e3ab8ea9557b991fe0a734d lib/perl5i/latest.pm
 SHA1 7cd3eb45145980fdd72f3376666868d53687de61 lib/perl5ifaq.pod
@@ -149,7 +150,7 @@ SHA1 ab901ec08963d28100d6cea98826996d69afc621 t/no_indirect.t
 SHA1 854d339355b7fbc0d4b60e8e487e9f7dd5ff5840 t/number.t
 SHA1 df9deb06bea83eca7c118a8de7fda2ce5ca48e7a t/perl5i.t
 SHA1 7e49f472b8d6ccd8eb857fe2380d0324f12ba5d4 t/require.t
-SHA1 55c8debbe1f977a2c595129b0cb8010f4495fbb9 t/require_message.t
+SHA1 efe35e7640b27496c3869f7139ff9e02e767ec90 t/require_message.t
 SHA1 2e1ebff1f7afdf5f31275abf1e2ba827bbf7c7ee t/say.t
 SHA1 45f2ad106ce4feba62c0658f27d9db076cfecaf1 t/scalar.t
 SHA1 378036382ffe51eabc5a716336c5da770edb9e35 t/signature.t
@@ -165,9 +166,9 @@ SHA1 f35b88bed7a9d65b91233a6b21a0239d07fac331 t/vs_listmoreutils.t
 SHA1 24924095de8d8e8761fb72525b297c875f811e62 t/wrap.t
 SHA1 513209d8bd9be29e5b9fafe997d626489e345c59 t/y2038.t
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.13 (Darwin)
+Version: GnuPG v2.0.16 (Darwin)
 
-iEYEARECAAYFAkx4ckoACgkQWMohlhD1QycegACfR23w1dY28Z9XjbxpgaRgOqTs
-1UkAnAi95MItijvOKrm5S22Vv2bQyGZ+
-=/y3N
+iEYEARECAAYFAkzspHwACgkQWMohlhD1QyccKACfX11iQl5CTnFlzLqTY8wh9GqE
+JCAAoMnq4Nklx+jP8k8PI+u4KUwsVgyO
+=dRXv
 -----END PGP SIGNATURE-----
