@@ -112,6 +112,41 @@ This list includes the $class itself and includes UNIVERSAL.  For example:
     my @isa = Child->mo->linear_isa();
 
 
+=head2 methods
+
+    my @methods = $class->mc->methods;
+    my $methods = $class->mc->methods;
+    my @methods = $object->mo->methods;
+    my $methods = $object->mo->methods;
+
+    my $methods = $object->mo->methods({
+        with_UNIVERSAL  => 0,
+        just_mine       => 1,
+    });
+
+Returns the methods available to a $class or $object.
+
+By default it returns all the methods available B<except those
+inherited from UNIVERSAL> because you usually don't want to know that.
+
+C<with_UNIVERSAL>, if true, makes it include methods inherited from UNIVERSAL.
+It defaults to false.
+
+C<just_mine>, if true, returns only methods defined in the $class.
+It defaults to false.
+
+
+=head2 symbol_table
+
+    my $table = $class->mc->symbol_table;
+    my $table = $obj->mo->symbol_table;
+
+Returns the symbol table for the given $class or class of the $object.
+
+If you don't know what a symbol table... good.  If you really want to
+know, see L<perldata/Typeglobs and FileHandles>.
+
+
 =head2 super
 
     my @return = $class->mc->super(@args);
