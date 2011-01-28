@@ -12,7 +12,7 @@ my $builder = MyBuild->new(
     module_name => 'perl5i',
     license     => 'perl',
     dist_author => 'Michael G Schwern <schwern@pobox.com>',
-    dist_version => "v2.5.0",
+    dist_version => "v2.5.1",
 
     requires => {
         'perl'                    => '5.10.0',
@@ -92,7 +92,7 @@ my $builder = MyBuild->new(
     recursive_test_files => 1,
 
     create_readme       => 1,
-    create_license      => 1,
+#    create_license      => 1,
 );
 
 $builder->requires->{"Time::y2038"} = "20100218" if $builder->needs_y2038;
