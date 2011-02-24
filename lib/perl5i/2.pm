@@ -69,13 +69,23 @@ sub import {
     (\&{$Latest .'::DateTime::dt_gmtime'})->alias($caller, 'gmtime');
     (\&{$Latest .'::DateTime::dt_localtime'})->alias($caller, 'localtime');
     (\&{$Latest .'::DateTime::dt_time'})->alias($caller, 'time');
+
+    # Export our stat and lstat
     (\&stat)->alias( $caller, 'stat' );
     (\&lstat)->alias( $caller, 'lstat' );
+
+    # Export our open
     (\&utf8_open)->alias($caller, 'open');
+
+    # Export our fixed die
     (\&perl5i_die)->alias($caller, "die");
 
+    # Export capture()
+    (\&capture)->alias($caller, "capture");
+
     # utf8ify @ARGV
-    $_ = Encode::decode('utf8', $_) for @ARGV;
+    state $have_encoded_argv = 0;
+    _encode_argv() unless $have_encoded_argv++;
 
     # Current lexically active major version of perl5i.
     $^H{perl5i} = 2;
@@ -153,3 +163,33 @@ sub lstat {
     return File::stat::lstat(@_);
 }
 
+
+sub capture(&;@) {
+    my($code, %opts) = @_;
+
+    # valid options
+    state $valid_options = { map { $_ => 1 } qw(merge tee) };
+
+    for my $key (keys %opts) {
+        croak "$key is not a valid option to capture()" unless $valid_options->{$key};
+    }
+
+    my $opts = join "/", sort { $a cmp $b } grep { $opts{$_} } keys %opts;
+
+    # Translate option combinations into Capture::Tiny functions
+    require Capture::Tiny;
+    state $captures = {
+        ""              => \&Capture::Tiny::capture,
+        "tee"           => \&Capture::Tiny::tee,
+        "merge"         => \&Capture::Tiny::capture_merged,
+        "merge/tee"     => \&Capture::Tiny::tee_merged
+    };
+
+    my $func = $captures->{$opts};
+    return $func->($code);
+}
+
+sub _encode_argv {
+    $_ = Encode::decode('utf8', $_) for @ARGV;
+    return;
+}

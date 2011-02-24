@@ -12,7 +12,7 @@ my $builder = MyBuild->new(
     module_name => 'perl5i',
     license     => 'perl',
     dist_author => 'Michael G Schwern <schwern@pobox.com>',
-    dist_version => "v2.5.1",
+    dist_version => "v2.6.0",
 
     requires => {
         'perl'                    => '5.10.0',
@@ -47,7 +47,8 @@ my $builder = MyBuild->new(
         'Digest::MD5'         => '2.36',
         'Object::ID'          => '0.1.0',
         "Devel::Declare::MethodInstaller::Simple"       => '0.006000',
-        'true'                => '0.12',
+        'true::VERSION'       => '0.16',
+        'Capture::Tiny'       => '0.06',
     },
     build_requires => {
         'ExtUtils::CBuilder' => '0.26',
@@ -92,7 +93,7 @@ my $builder = MyBuild->new(
     recursive_test_files => 1,
 
     create_readme       => 1,
-#    create_license      => 1,
+    create_license      => 1,
 );
 
 $builder->requires->{"Time::y2038"} = "20100218" if $builder->needs_y2038;
