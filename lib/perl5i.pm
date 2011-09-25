@@ -6,13 +6,19 @@ package perl5i;
 ######################################
 
 use strict;
+use parent 'perl5i::latest';
+
 use perl5i::VERSION; our $VERSION = perl5i::VERSION->VERSION;
 
 my $Latest = perl5i::VERSION->latest;
 
 sub import {
-    require Carp;
-    Carp::croak(<<END);
+    if ($0 eq '-e') {
+        goto &perl5i::latest::import;
+    }
+    else {
+        require Carp;
+        Carp::croak(<<END);
 perl5i will break compatibility in the future, you can't just "use perl5i".
 
 Instead, "use $Latest" which will guarantee compatibility with all
@@ -20,6 +26,7 @@ features supplied in that major version.
 
 Type "perldoc perl5i" for details in the section "Using perl5i".
 END
+    }
 }
 
 1;
@@ -70,7 +77,8 @@ Thus the code you write with, for example, C<perl5i::2> will always
 remain compatible even as perl5i moves on.
 
 If you want to be daring, you can C<use perl5i::latest> to get the
-latest version.
+latest version. This will automatically happen if the program is C<-e>.
+This lets you do slightly less typing for one-liners like C<perl -Mperl5i -e ...>
 
 If you want your module to depend on perl5i, you should depend on the
 versioned class.  For example, depend on C<perl5i::2> and not
@@ -553,6 +561,15 @@ Each key will be overriden individually.
     1234->commify({ separator => "." });  # 1.234
 
 
+=head3 reverse
+
+    my $reverse = $string->reverse;
+
+Reverses a $string.
+
+Unlike Perl's reverse(), this always reverses the string regardless of context.
+
+
 =head2 List Autoboxing
 
 All the functions from L<List::Util> and select ones from
@@ -752,14 +769,29 @@ C<$!> or C<$?> which makes the exit code unpredictable.  If you want
 to exit with a message and a special exit code, use C<warn> then
 C<exit>.
 
-=head2 utf8
+=head2 list()
 
-L<utf8> lets you put UTF8 encoded strings into your source code.
-This means UTF8 variable and method names, strings and regexes.
+C<list> will force list context similar to how
+L<perlfunc/scalar|scalar> will force scalar context.
 
-It means strings will be treated as a set of characters rather than a
-set of bytes.  For example, C<length> will return the number of
-characters, not the number of bytes.
+
+=head2 utf8::all
+
+perl5i turns on L<utf8::all> which turns on all the Unicode features
+of Perl it can.
+
+Here is the current list, more may be turned on later.
+
+Bare strings in your source code are now UTF8.  This means UTF8
+variable and method names, strings and regexes.
+
+    my $message = "انا لا اتكلم العربيه";
+    my $τάδε    = "It's all Greek to me!";
+    sub fünkßhüñ { ... }
+
+Strings will be treated as a set of characters rather than a set of
+bytes.  For example, C<length> will return the number of characters,
+not the number of bytes.
 
     length("perl5i is MËTÁŁ");  # 15, not 18
 
@@ -846,29 +878,8 @@ You can also request a pipe for IPC:
     my $message = $proc->read();
     $proc->say("reply");
 
-API Overview: (See L<Child> for more information)
+See L<Child> for more information.
 
-=over 4
-
-=item $proc->is_complete()
-
-=item $proc->wait()
-
-=item $proc->kill($SIG)
-
-=item $proc->pid()
-
-=item $proc->exit_status()
-
-=item $parent->pid()
-
-=item $parent->detach()
-
-=item $proc_or_parent->read()
-
-=item $proc_or_parent->write( @MESSAGES )
-
-=item $proc_or_parent->say( @MESSAGES )
 
 =back
 
@@ -1022,6 +1033,10 @@ And you can use it on the C<#!> line.
     #!/usr/bin/perl5i
 
     gmtime->year->say;
+
+If you write a one-liner without using this program, saying C<-Mperl5i> means
+C<-Mperl5i::latest>. Please see L</"Using perl5i"> and L</VERSIONING> for
+details.
 
 
 =head1 BUGS

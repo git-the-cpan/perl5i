@@ -1,5 +1,5 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.66.
+signed via the Module::Signature module, version 0.68.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
@@ -17,22 +17,22 @@ Hash: SHA1
 SHA1 cabb356e64cf34f74887e8a3d715cb63312ca07d .DS_Store
 SHA1 b38d844144d8fd1d7273736c48f01106df558137 .perlcriticrc
 SHA1 f723872651f0cd52a4aca957af3536f931667340 .perltidyrc
-SHA1 f4825b6ffa0772b2f8d6cfb18a26f5d01c6809ed Build.PL
-SHA1 02c29eb3871d3d6a9aeb3b2ba1da15e64c39a92f Changes
+SHA1 55b0b4e25257f7da33c34ef19ff80fb016406595 Build.PL
+SHA1 6e618052eac5df4ed2d6169a3b089ace0dca0369 Changes
 SHA1 e421537a09310e0e3b3fc430b50d85a0e9d42465 INSTALL.SKIP
-SHA1 a8d6aed00125f3fe587b419c238f4a718aa79934 LICENSE
-SHA1 ad527abbc5fc22d2af1893700d19a57666adf0f9 MANIFEST
+SHA1 61c777820e70593419593ecb9680c5839f611595 LICENSE
+SHA1 d9e73eba7f9d49ea5a023055816a4ea88479ddaa MANIFEST
 SHA1 77d5a2b8a3007a97a32bba05e2333513e51ee696 MANIFEST.SKIP
-SHA1 e171b363c9ae9f108535c658050c4d2d87d86900 META.json
-SHA1 07029a59921e9847d76e32d2ed37e571ffaa9564 META.yml
+SHA1 05e455ae64d4ee90f3f4fda24153cc850f7e4ca2 META.json
+SHA1 58b3350fe3c5f6a2b013a94e41a78fd482bc479f META.yml
 SHA1 f5b7718ad133f036cf62e6ba93bfb6e61572a4c0 PATCHING
-SHA1 d147c6babc1baf3d4fd5f695683f7418e4a386ec README
-SHA1 1aacf26b617e212c197fc971d4f310d781a63cb9 bin/perl5i.bat.PL
+SHA1 33c772ffc0f32a434c194f67e6418df425417639 README
+SHA1 8c3d41e535df82cfc3e27bdd8f3c962d93a975b7 bin/perl5i.bat.PL
 SHA1 669e8e04934906fd5dc114f891cda03d3008a4df bin/perl5i.c.PL
 SHA1 c2f623ee631640aebd3c9ee304c292c1cde9e115 bin/perl5i.plx
 SHA1 dc46f75caf47524cf71d030325c5a9cc4cb8b9a7 file_notes.txt
 SHA1 bdd9329cc7d5bf0430ea3b9908b2dd271339de60 inc/MyBuild.pm
-SHA1 649526d3ee59a2321735aa43a623a35032529877 lib/perl5i.pm
+SHA1 49925adc65b3d9d73178095ed9b17d0fa84e5bc9 lib/perl5i.pm
 SHA1 bf814378c9005af01f474d3a0a7124d683364487 lib/perl5i/0.pm
 SHA1 03ab9768a7c07e28abd5a46be8246ba986a001f4 lib/perl5i/0/ARRAY.pm
 SHA1 f7d5bde84eae968c048101befa515cf7dc5131b1 lib/perl5i/0/DEFAULT.pm
@@ -49,32 +49,32 @@ SHA1 8dced3f385cdafb0ead35f648e675ebf00ca42b9 lib/perl5i/1/DateTime.pm
 SHA1 5810cd9c983ea722fc0969d2344f04bbbc377eca lib/perl5i/1/HASH.pm
 SHA1 198cda2277028cc601ec3878e3b8bb3c9dd38502 lib/perl5i/1/Meta.pm
 SHA1 8f90cc918a83a85b7454d221d1e6309b0de01c95 lib/perl5i/1/Meta/Class.pm
-SHA1 883eaac105a754a007f2cf67688c7f3d017996b8 lib/perl5i/1/Meta/Instance.pm
+SHA1 4c9a5932c137e024834a79c49e3e2075def70a59 lib/perl5i/1/Meta/Instance.pm
 SHA1 04ffa5ad0e8870265d4447cbfec4a458ae1969d1 lib/perl5i/1/SCALAR.pm
 SHA1 2a1d096958fdcef671e901c1c38c4646d533bbc8 lib/perl5i/1/UNIVERSAL.pm
 SHA1 3c5e3b33a81e92de285b515f4f89b76912ecc456 lib/perl5i/1/autobox.pm
-SHA1 454ff11f197c8c620189e59321234f0f876760b5 lib/perl5i/2.pm
+SHA1 3700fb23c21bf45a016b2a8764377313d00e782c lib/perl5i/2.pm
 SHA1 379a73364893ad2bb3e4589e40c6cf15b76137eb lib/perl5i/2/ARRAY.pm
 SHA1 67ab683759eecfea3135e1656e4a77524e840922 lib/perl5i/2/CODE.pm
 SHA1 cb64a5676d1cc89ed57551ccdcc6ddd603704c54 lib/perl5i/2/DateTime.pm
 SHA1 cead1bbc810f0f3a6ea08a48357345b394699b43 lib/perl5i/2/HASH.pm
-SHA1 1e1abb2fb1fbc08b16950386ace401efdd24462a lib/perl5i/2/Meta.pm
+SHA1 f83d0fef2c716d4495abd52a41678b7c68f6e06a lib/perl5i/2/Meta.pm
 SHA1 d51e9b5d1cc2499c02e2e74755e52ad2c376b00f lib/perl5i/2/Meta/Class.pm
-SHA1 f64f765fa57d80f6e7729786dbe0243c404bef66 lib/perl5i/2/Meta/Instance.pm
+SHA1 6f8707546301ba3164b5ab3524a6850a82b5807a lib/perl5i/2/Meta/Instance.pm
 SHA1 e1a52dcc88d305b13efb7409ebb57a3928f33e44 lib/perl5i/2/RequireMessage.pm
-SHA1 83c062fb237e6079cb9181ef7bf1fcfd6dbf4251 lib/perl5i/2/SCALAR.pm
-SHA1 c908ad0b7a97fdea562bb04a436278dede807d7b lib/perl5i/2/Signature.pm
+SHA1 09712a78333e189437716f9347d0d47625f8b80b lib/perl5i/2/SCALAR.pm
+SHA1 5999ee79b914aef544079efa7c9846c637a0b63f lib/perl5i/2/Signature.pm
 SHA1 8c4f81a68b490e92ef63812b9a969dcd111588e3 lib/perl5i/2/Signature/Function/None.pm
 SHA1 d7d5cbbcbb596f5a20136629fee00a17e577583f lib/perl5i/2/Signature/Method/None.pm
 SHA1 25e2d5f592ab2e417af01f5b999b47fa60cfde9d lib/perl5i/2/Signature/None.pm
 SHA1 5e44c93935e25348114244851c55d61bf9d7be26 lib/perl5i/2/Signature/Real.pm
 SHA1 f4f74663f9e14793221deceefd31233201f0a7e0 lib/perl5i/2/Signatures.pm
-SHA1 e65291c95928ed04ee1122137323b34546d44ad8 lib/perl5i/2/UNIVERSAL.pm
+SHA1 bace3e48dfea8cf17ba5ec32693f7eaf3dc53a2a lib/perl5i/2/UNIVERSAL.pm
 SHA1 dd478e14034c6e080729715a4234adab51b5af10 lib/perl5i/2/autobox.pm
 SHA1 5ab3a0a999b571d2ff15cd2ab0ab298e093c89c4 lib/perl5i/2/equal.pm
 SHA1 fedeaf68baea0ee0f9aecfeeefc429bd3b2f2b9a lib/perl5i/Meta.pod
 SHA1 6e4943b13b89f857d02c848847ed4d7496816c88 lib/perl5i/Signature.pod
-SHA1 4f98b2bd5a9319f3b6ae11f31aea9cdc2e530643 lib/perl5i/VERSION.pm
+SHA1 addebb9428351bc400104bd73275236bb78bdae5 lib/perl5i/VERSION.pm
 SHA1 30ab9bc777cf7ec651fa2d5bf4c6860a1aa86d79 lib/perl5i/cmd.pm
 SHA1 7eee47edc7738c801e3ab8ea9557b991fe0a734d lib/perl5i/latest.pm
 SHA1 3ada72c7f7191c0f11530b0107722a9b49ecc410 lib/perl5ifaq.pod
@@ -111,7 +111,7 @@ SHA1 2df951eafd89d997df5a5405350b245d0e349bf8 t/Meta/reftype.t
 SHA1 2b9d8774b61cce513def3ad1b89b60a3443f1e34 t/Meta/super.t
 SHA1 96a0fc55f0e80a23aeb76faa7c0aeca7088da321 t/Meta/symbol_table.t
 SHA1 004a351b81308007a5db17ded798a0404dd0e0f1 t/Want.t
-SHA1 09eaee5008e280b9e2515a849d4133fa9290652a t/alias.t
+SHA1 de6cd53c95afb4e59c2303ac790d2c4d8c509db0 t/alias.t
 SHA1 81fbaa24db062d0a8c5195f0ab9b3a6f8a8d546f t/autobox.t
 SHA1 91b5115909d964cbb9950d8577e1bb0d3ea38a56 t/autodie.t
 SHA1 b20d9c7a317f6b85383ed60201d2407d3f571fb8 t/autovivification.t
@@ -121,7 +121,7 @@ SHA1 de1a2b1ce4678806fe8ecd0bad606bf416cdc78a t/capture.t
 SHA1 6e3fd1005fd56be13c477ff595d375e00f91785f t/carp.t
 SHA1 542a5f0a69b3ef4ff100631f1073106e1b6cc5ab t/center.t
 SHA1 3e2c1702a6bec409d2fe117863142f4c500a0ad4 t/chdir.t
-SHA1 fa6cfe4794fe55dbf5b687590d8f27180e9e9c57 t/command_line_wrapper.t
+SHA1 71fbd7e1b0d5f135d14d1c379bdb8ffbd782a610 t/command_line_wrapper.t
 SHA1 aa8a48ce799950b1b0a06772ac01993debf58621 t/commify.t
 SHA1 543d149d3fe5789f115f3e3f4ad736b3b93845cd t/datetime.t
 SHA1 0fbeca21adb225c48f08e2fb562006f609c61998 t/die.t
@@ -146,6 +146,7 @@ SHA1 a3ae4795b6233c66cece291c376787d9675f9121 t/lexical.t
 SHA1 e10829ae920d040c6327c3319803bd710bafab57 t/lib/Test/perl5i.pm
 SHA1 d81a5833448a1fe358691f19d527c42433440e6b t/lib/ThisIsTrue.pm
 SHA1 6473a2e78846f710a3aaf268a6d41aa8af71e9c7 t/list-trim.t
+SHA1 38d25aaee795c4137932bf3e711c0460ebf0a9ce t/list.t
 SHA1 d72a3c5210b079dc8c79c963f72b312d44934bc0 t/load_together.t
 SHA1 77a071110a2a1d7d637747039a2aa4ccbf9c9e2a t/map.t
 SHA1 f0ee744762d3e52548e9f657608e617eccf38ea3 t/method_leaking.t
@@ -153,11 +154,11 @@ SHA1 d278e655389c8a4d10e0e9fb22c5cfb829a1803c t/modern_perl.t
 SHA1 dbfe5078758313fee875c4f7818020836b4aa8cb t/module2path.t
 SHA1 ab901ec08963d28100d6cea98826996d69afc621 t/no_indirect.t
 SHA1 854d339355b7fbc0d4b60e8e487e9f7dd5ff5840 t/number.t
-SHA1 df9deb06bea83eca7c118a8de7fda2ce5ca48e7a t/perl5i.t
+SHA1 8b85b0a5286c3552715056eedfa4e83a55d88ba4 t/perl5i.t
 SHA1 7e49f472b8d6ccd8eb857fe2380d0324f12ba5d4 t/require.t
 SHA1 efe35e7640b27496c3869f7139ff9e02e767ec90 t/require_message.t
 SHA1 2e1ebff1f7afdf5f31275abf1e2ba827bbf7c7ee t/say.t
-SHA1 45f2ad106ce4feba62c0658f27d9db076cfecaf1 t/scalar.t
+SHA1 9f60e6a179bc75dbda34688d597f42b75280c7f5 t/scalar.t
 SHA1 378036382ffe51eabc5a716336c5da770edb9e35 t/signature.t
 SHA1 d4b3c6c027ce4c9499693cef8b02701c9ed5644b t/signatures.t
 SHA1 b53366faf1234bcaeb79eed6cabccaf33444d52f t/taint.t
@@ -171,9 +172,9 @@ SHA1 f35b88bed7a9d65b91233a6b21a0239d07fac331 t/vs_listmoreutils.t
 SHA1 24924095de8d8e8761fb72525b297c875f811e62 t/wrap.t
 SHA1 513209d8bd9be29e5b9fafe997d626489e345c59 t/y2038.t
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.16 (Darwin)
+Version: GnuPG v2.0.18 (Darwin)
 
-iEYEARECAAYFAk2K2DEACgkQWMohlhD1QycKhQCg2Km1JIWYLEfdgDPUZEejLegB
-4CsAoJzNYGOJFbFvJgkNeJC6TbVnbn/U
-=LIz/
+iEYEARECAAYFAk5+sKIACgkQWMohlhD1QycJeACgll457W9tcj+JNcJeuJsyMkEn
+WEoAmgIfHhZteOKrJkVyyClPt48742rI
+=TlDl
 -----END PGP SIGNATURE-----
