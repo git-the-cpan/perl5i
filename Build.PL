@@ -12,13 +12,13 @@ my $builder = MyBuild->new(
     module_name => 'perl5i',
     license     => 'perl',
     dist_author => 'Michael G Schwern <schwern@pobox.com>',
-    dist_version => "v2.8.0",
+    dist_version => "v2.9.0",
 
     requires => {
         'perl'                    => '5.10.0',
         'Modern::Perl'            => '1.03',
         'CLASS'                   => '1.00',
-        'Child'                   => '0.007',
+        'Child'                   => '0.009',
         'DateTime'                => '0.47',
         'DateTime::Format::Epoch' => '0.11',
         'DateTime::TimeZone::Tzfile' => '0.002',
