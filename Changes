@@ -1,3 +1,23 @@
+2.10.0  Sat Jul  7 11:57:01 PDT 2012
+  Bug Fixes
+  * Upgraded autodie dependency to fix automatic utf8 open.
+    [github #220] [github #218]
+
+  Test Fixes
+  * Removed a use of Test::Exception, which we don't depend on.
+
+  New Features
+  * %hash = @array->as_hash; will turn all the values in @array to
+    keys in %hash. [github 172] (Prashan Dharmasena)
+  * @array->popn($n) and @array->shiftn() pop() and shift() multiple
+    elements off an array. [github 149] (Tanner Hobson)
+  * @array->pick($n) and @array->pick_one will pick random elements
+    out of an @array, like picking cards from a deck.
+    [github 145] (Prashan Dharmasena)
+  * The Carp 1.25 formatting change has been smoothed over using
+    Carp::Fix::1_25.
+
+
 2.9.1  Fri Nov 11 16:13:32 PST 2011
   Bug Fixes
   * @empty_array->foreach(\&callback) would do the callback() once

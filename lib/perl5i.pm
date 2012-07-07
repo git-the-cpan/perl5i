@@ -17,8 +17,8 @@ sub import {
         goto &perl5i::latest::import;
     }
     else {
-        require Carp;
-        Carp::croak(<<END);
+        require Carp::Fix::1_25;
+        Carp::Fix::1_25::croak(<<END);
 perl5i will break compatibility in the future, you can't just "use perl5i".
 
 Instead, "use $Latest" which will guarantee compatibility with all
@@ -620,6 +620,44 @@ A normal subroutine with no signature will get one at a time.
 If @array is not a multiple of the iteration (for example, @array has
 5 elements and you ask 2 at a time) the behavior is currently undefined.
 
+=head3 as_hash
+
+    my %hash = @array->as_hash;
+
+This method returns a %hash where each element of @array is a key.
+The values are all true.  Its functionality is similar to:
+
+    my %hash = map { $_ => 1 } @array;
+
+Example usage:
+
+    my @array = ("a", "b", "c");
+    my %hash = @array->as_hash;
+    say q[@array contains 'a'] if $hash{"a"};
+
+=head3 pick
+
+    my @rand = @array->pick($number);
+
+The pick() method returns a list of $number elements in @array.
+If $number is larger than the size of the list, it returns the entire list shuffled.
+
+Example usage:
+
+    my @array = (1, 2, 3, 4);
+    my @rand = @array->pick(2);
+
+=head3 pick_one
+
+    my $rand = @array->pick_one;
+
+The pick_one() method returns a random element in @array.  
+It is similar to @array->pick(1), except that it does not return a list.
+
+Example usage:
+
+    my @array = (1,2,3,4);
+    my $rand = @array->pick_one;
 
 =head3 diff
 
@@ -658,6 +696,32 @@ L<Path::Class>, etc.), it tries its best to treat them as strings or numbers.
 
     [ $uri ]->diff( [ "http://www.perl.com" ] ); # empty, they are equal
     [ $uri ]->diff( [ $uri2 ] );                 # empty, they are equal
+
+
+=head3 popn
+
+    my @newarray = @array->popn($n);
+
+L<Pops|perlfunc/pop> C<$n> values from the C<@array>.
+
+If C<$n> is greater than the length of C<@array>, it will return the
+whole C<@array>.  If C<$n> is 0, it will return an empty array.
+
+A negative C<$n> or non-integer is an error.
+
+    my @array = (1, 2, 3, 4, 5);
+    my @newarray = @array->popn(3); # (3, 4, 5)
+
+
+=head3 shiftn
+
+       my @newarray = @array->shiftn($n);
+
+Works like L<popn>, but it L<shifts|perlfunc/shift> off the front of
+the array instead of popping off the end.
+
+    my @array = (1, 2, 3, 4, 5);
+    my @newarray = @array->shiftn(3); # (1, 2, 3)
 
 
 =head3 intersect
@@ -881,6 +945,9 @@ merge will merge C<STDOUT> and C<STDERR> into one variable.
 =head2 Carp
 
 C<croak> and C<carp> from L<Carp> are always available.
+
+The Carp message will always format consistently, smoothing over the
+backwards incompatible change in Carp 1.25.
 
 =head2 Child
 
