@@ -1118,6 +1118,29 @@ Example:
     from CPAN or another repository.  Your library paths are:
         Indented list of paths, 1 per line...
 
+
+=head1 Turning off features
+
+    use perl5i::2 -skip => \@features_to_skip;
+
+While perl5i is intended as a curated collection of modules, its
+possible you might not want certain features.  Features can be
+turned off in your scope by using C<-skip>.
+
+For example, this will skip loading Try::Tiny.
+
+    use perl5i::latest -skip => [qw(Try::Tiny)];
+
+Why would you do this?  You might want to use a different try/catch
+module such as L<TryCatch> which provides its own C<try> and C<catch>.
+
+The feature strings are: C<autobox>, C<autodie>, C<autovivification>,
+C<capture>, C<Carp::Fix::1_25>, C<Child>, C<CLASS>, C<die>, C<English>,
+C<File::chdir>, C<indirect>, C<list>, C<Meta>, C<Modern::Perl>,
+C<Perl6::Caller>, C<Signatures>, C<stat>, C<time>, C<true>, C<Try::Tiny>,
+C<utf8::all>, C<Want>.
+
+
 =head1 Command line program
 
 There is a perl5i command line program installed with perl5i (Windows
@@ -1145,8 +1168,7 @@ currently recommend having them in the same package.
 
 See L<http://github.com/schwern/perl5i/issues/labels/bug> for a complete list.
 
-Please report bugs at L<http://github.com/schwern/perl5i/issues/> or
-email L<mailto:perl5i@googlegroups.com>.
+Please report bugs at L<http://github.com/schwern/perl5i/issues/>.
 
 
 =head1 VERSIONING
@@ -1198,8 +1220,9 @@ See L<http://dev.perl.org/licenses/artistic.html>
 
 Repository:   L<http://github.com/schwern/perl5i/tree/master>
 Issues/Bugs:  L<http://github.com/schwern/perl5i/issues>
-IRC:          irc.perl.org on the #perl5i channel
-Mailing List: L<http://groups.google.com/group/perl5i/>
+IRC:          L<irc://irc.perl.org> on the #perl5i channel
+Wiki:         L<http://github.com/schwern/perl5i/wiki>
+Twitter:      L<http://twitter.com/perl5i>
 
 Frequently Asked Questions about perl5i: L<perl5ifaq>
 
