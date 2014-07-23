@@ -1,3 +1,27 @@
+2.13.0  Wed Jul 23 11:51:53 PDT 2014
+  New Features
+  * $scalar->path will return a Path::Tiny object using the contents
+    of $scalar.  Makes working with files much, much easier.
+    [github #229] [github #247] (Michael G Schwern)
+
+  Distribution Changes
+  * The project has moved to the evalEmpire organization to allow
+    broader project admin options. http://github.com/evalEmpire/perl5i
+    (Michael G Schwern)
+
+  Doc Changes
+  * Added a project rationale. [github #252] [github #226]
+    (Carlos Lima)
+
+  Bug Fixes
+  * Fixed a crash if the perl5i command line is fed a null byte.
+    [github #269] [github #273] (Reini Urban) (Lars Dɪᴇᴄᴋᴏᴡ 迪拉斯)
+  * Stop using deprecated Hash::StoreIterator::eech().
+    [github #270] (Chad Granum)
+  * The methods() meta method now ignores subroutines declared with func().
+    [github #222] [github #253] (Carlos Lima)
+
+
 2.12.0  Mon Jun 10 18:09:31 PDT 2013
   New Features
   * Added the ability to skip loading certain features. [github #228]

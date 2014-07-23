@@ -12,7 +12,7 @@ my $builder = MyBuild->new(
     module_name => 'perl5i',
     license     => 'perl',
     dist_author => 'Michael G Schwern <schwern@pobox.com>',
-    dist_version => "v2.12.0",
+    dist_version => "v2.13.0",
 
     requires => {
         'perl'                    => '5.10.0',
@@ -51,8 +51,9 @@ my $builder = MyBuild->new(
         'Capture::Tiny'       => '0.06',
         'utf8::all'           => '0.002',
         'Carp::Fix::1_25'     => '1.000000',
-        'Hash::StoredIterator' => '0.005',
+        'Hash::StoredIterator' => '0.007',
         'Hash::FieldHash'     => '0.06',
+        'Path::Tiny'          => '0.036',
     },
     build_requires => {
         'ExtUtils::CBuilder' => '0.26',
@@ -69,8 +70,8 @@ my $builder = MyBuild->new(
 
     meta_merge => {
         resources => {
-            repository  => 'http://github.com/schwern/perl5i/tree/master',
-            bugtracker  => 'http://github.com/schwern/perl5i/issues',
+            repository  => 'http://github.com/evalEmpire/perl5i/tree/master',
+            bugtracker  => 'http://github.com/evalEmpire/perl5i/issues',
             Chat        => "irc://irc.perl.org/#perl5i",
         },
         no_index => {
